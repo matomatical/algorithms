@@ -4,4 +4,5 @@ A collection of algorithms and data structure utility classes, created as self-a
 
 ## Contents
 
-* 
+* `UnionFinder`, a class providing fast `Union` and `Find` methods using path compression.
+
