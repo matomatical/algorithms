@@ -24,7 +24,7 @@ RUNNER = org.junit.runner.JUnitCore
 # the -cp flag sets the class path
 # the -d flad sets the output directory
 JFLAGS = -g -cp "./$(SRC)/" -d $(BIN)
-TFLAGS = -cp "./$(BIN)/:./$(TESTD):./$(TESTD)/junit.jar:./$(TESTD)/hamcrest.jar"
+TFLAGS = -cp "./$(BIN)/:./$(TESTD):./$(TESTD)/jar/junit.jar:./$(TESTD)/jar/hamcrest.jar"
 
 default: build
 
