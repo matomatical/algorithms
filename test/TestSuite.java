@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 @Suite.SuiteClasses({
 	// INSERT YOUR TEST CLASSES HERE, SEPARARTED BY COMMAS
 	UnionFinderTest.class,
+	BinarySearcherTest.class,
 })
 
 /** TestSuite; junit test class to run all unit tests
