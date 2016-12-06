@@ -4,7 +4,8 @@ A collection of algorithms and data structure utility classes, created as self-a
 
 ## Contents
 
-* `UnionFinder`, a class providing fast `Union` and `Find` methods using path compression.
+* **UnionFinder**, a class providing objects for fast `union` and `find` methods using path compression.
+* **BinarySearcher**, a class providing a static `search` method that searches a **sorted** array of comparables using binary search.
 
 ## Testing
 
