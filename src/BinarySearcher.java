@@ -2,20 +2,27 @@ package com.matomatical.ads;
 
 public class BinarySearcher {
 
-	public static int search(Comparable[] array, Comparable key){
+	/** Search a **sorted** array of objects for a key using binary search.
+	 * @param array Sorted array of objects
+	 * @param key An object comparable to those in array to look for
+	 * @return The index of an occurence of key in array, or -1 if key does not
+	 * appear. No exception is thrown if array is not sorted; this will cause
+	 * undefined behaviour.
+	 **/
+	public static <T> int search(T[] array, T key, Comparer<T> comparer){
 		int lo = 0;
 		int hi = array.length - 1;
 
 		while(hi >= lo) {
 			
 			int mid = (lo + hi) / 2;
-			int compare = key.compareTo(array[mid]);
+			int comparison = comparer.compare(key, array[mid]);
 
-			if(compare < 0){
+			if(comparison < 0){
 				// key is below array[mid] so we can throw out the high half
 				hi = mid - 1;
 
-			} else if (compare > 0) {
+			} else if (comparison > 0) {
 				// key is above array[mid] so we can throw out the low half
 				lo = mid + 1;
 
@@ -28,7 +35,16 @@ public class BinarySearcher {
 		// if hi passes lo, key is not in the array so return -1
 		return -1;
 	}
+
+	public interface Comparer<T> {
+		/** Compares two objects a and b, returning:
+		 * @return 0 iff a equals b, negative iff a is less than b,
+		 * positive iff a is greater than b
+		 */
+		public int compare(T a, T b);
+	}
 }
+
 
 /* example
 
