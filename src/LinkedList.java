@@ -1,10 +1,13 @@
 package com.matomatical.ads;
 
-public class LinkedList<Data> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class LinkedList<Item> implements Iterable<Item> {
 	
 	private class Node {
-		public Data data;
-		public Node(Data data) {
+		public Item data;
+		public Node(Item data) {
 			this.data = data;
 		}
 		public Node next;
@@ -17,7 +20,7 @@ public class LinkedList<Data> {
 	/** Add an element to the start of the list
 	 * @param data the element to add
 	 */
-	public void add(Data data) {
+	public void add(Item data) {
 		Node node = new Node(data);
 		node.next = first;
 
@@ -32,7 +35,7 @@ public class LinkedList<Data> {
 	/** Add an element to the end of the list
 	 * @param data the element to add
 	 */
-	public void addEnd(Data data) {
+	public void addEnd(Item data) {
 		Node node = new Node(data);
 
 		if(last != null){
@@ -49,7 +52,7 @@ public class LinkedList<Data> {
 	 * @return the element from the beginning of the list
 	 * @throws EmptyException if there are no items in the list
 	 */
-	public Data remove() throws EmptyException {
+	public Item remove() throws EmptyException {
 		if(length == 0){
 			throw new EmptyException("no items to remove");
 		}
@@ -65,13 +68,12 @@ public class LinkedList<Data> {
 		return node.data;
 	}
 
-
 	/** Remove and return an element from the end of the list. O(n) where
 	 * n is the length of the list.
 	 * @return the element from the end of the list
 	 * @throws EmptyException if there are no items in the list
 	 */
-	public Data removeEnd() throws EmptyException {
+	public Item removeEnd() throws EmptyException {
 		if(length == 0){
 			throw new EmptyException("no items to remove");
 		}
@@ -104,5 +106,51 @@ public class LinkedList<Data> {
 	/** true iff there are no elements in the list */
 	public boolean isEmpty(){
 		return (length == 0);
+	}
+
+	@Override
+	public Iterator<Item> iterator(){
+		return new LinkedListIterator(this.first);
+	}
+
+	public class LinkedListIterator implements Iterator<Item>{
+		Node next, prev = null;
+
+		LinkedListIterator(Node first){
+			next = first;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return (next != null);
+		}
+
+		@Override
+		public Item next() throws NoSuchElementException {
+			if(next == null){
+				throw new NoSuchElementException();
+			}
+
+			Item data = next.data;
+			prev = next;
+			next = next.next;
+			return data;
+		}
+
+		@Override
+		public void remove() throws NoSuchElementException {
+			if(next == null){
+				throw new NoSuchElementException();
+			}
+
+			if(prev != null){
+				prev.next = next.next;
+			} else {
+				LinkedList.this.first = next.next;
+				if(next.next == null){
+					LinkedList.this.last = null;
+				}
+			}
+		}
 	}
 }

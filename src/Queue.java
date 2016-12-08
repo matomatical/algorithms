@@ -1,18 +1,18 @@
 package com.matomatical.ads;
 
-public class Queue<Data> {
+public class Queue<Item> {
 	
-	private LinkedList<Data> list = new LinkedList<Data>();
+	private LinkedList<Item> list = new LinkedList<Item>();
 	
 	/** Add an item to the end of the queue */
-	public void enqueue(Data data) {
+	public void enqueue(Item data) {
 		list.addEnd(data);
 	}
 	
 	/** Remove the frontmost item from the queue
 	 * @throws EmptyException if the queue is empty
 	 */
-	public Data dequeue() {
+	public Item dequeue() {
 		return list.remove();
 	}
 	

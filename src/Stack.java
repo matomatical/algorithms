@@ -1,18 +1,18 @@
 package com.matomatical.ads;
 
-public class Stack<Data> {
+public class Stack<Item> {
 	
-	private LinkedList<Data> list = new LinkedList<Data>();
+	private LinkedList<Item> list = new LinkedList<Item>();
 
 	/** Add an item to the top of the stack */
-	public void push(Data data) {
+	public void push(Item data) {
 		list.add(data);
 	}
 	
 	/** Remove the topmost item from the stack
 	 * @throws EmptyException if the stack is empty
 	 */
-	public Data pop() throws EmptyException {
+	public Item pop() throws EmptyException {
 		return list.remove();
 	}
 	

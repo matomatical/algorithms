@@ -1,10 +1,10 @@
 package com.matomatical.ads;
 
-public class DoublyLinkedList<Data> {
+public class DoublyLinkedList<Item> {
 	
 	private class Node {
-		public Data data;
-		public Node(Data data) {
+		public Item data;
+		public Node(Item data) {
 			this.data = data;
 			this.next = null;
 			this.prev = null;
@@ -19,7 +19,7 @@ public class DoublyLinkedList<Data> {
 	/** Add an element to the start of the list
 	 * @param data the element to add
 	 */
-	public void add(Data data) {
+	public void add(Item data) {
 		Node node = new Node(data);
 		
 		if(first != null){
@@ -36,7 +36,7 @@ public class DoublyLinkedList<Data> {
 	/** Add an element to the end of the list
 	 * @param data the element to add
 	 */
-	public void addEnd(Data data) {
+	public void addEnd(Item data) {
 		Node node = new Node(data);
 		
 		if(last != null){
@@ -55,7 +55,7 @@ public class DoublyLinkedList<Data> {
 	 * @return the element from the beginning of the list
 	 * @throws EmptyException if there are no items in the list
 	 */
-	public Data remove() throws EmptyException {
+	public Item remove() throws EmptyException {
 		if(length == 0){
 			throw new EmptyException("no items to remove");
 		}
@@ -78,7 +78,7 @@ public class DoublyLinkedList<Data> {
 	 * @return the element from the end of the list
 	 * @throws EmptyException if there are no items in the list
 	 */
-	public Data removeEnd() throws EmptyException {
+	public Item removeEnd() throws EmptyException {
 		if(length == 0){
 			throw new EmptyException("no items to remove");
 		}

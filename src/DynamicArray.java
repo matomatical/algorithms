@@ -1,24 +1,24 @@
 package com.matomatical.ads;
 
 @SuppressWarnings("unchecked")
-public class DynamicArray<Data>{
+public class DynamicArray<Item>{
 
 	private static final int INITIAL_SIZE = 1;
 
-	private Data[] elements;
+	private Item[] elements;
 	private int capacity, n;
 	
 	public DynamicArray() {
 		
 		// overcoming generic array creation error with a cast,
 		// as per lectures and http://stackoverflow.com/a/2924453/5395650
-		elements = (Data[]) new Object[INITIAL_SIZE];
+		elements = (Item[]) new Object[INITIAL_SIZE];
 
 		capacity = INITIAL_SIZE;
 		n = 0;
 	}
 
-	public Data get(int i) throws IndexException {
+	public Item get(int i) throws IndexException {
 		if(i < n){
 			return elements[i];
 		} else {
@@ -26,7 +26,7 @@ public class DynamicArray<Data>{
 		}
 	}
 
-	public void set(int i, Data data) throws IndexException {
+	public void set(int i, Item data) throws IndexException {
 		if(i < n){
 			elements[i] = data;
 		} else {
@@ -34,15 +34,15 @@ public class DynamicArray<Data>{
 		}
 	}
 
-	public void add(Data data){
+	public void add(Item data){
 		elements[n++] = data;
 		if(n==capacity){
 			resize(n * 2);
 		}
 	}
 
-	public Data remove(){
-		Data data = elements[--n];
+	public Item remove(){
+		Item data = elements[--n];
 		elements[n] = null;
 
 		if(n <= capacity / 4){
@@ -55,7 +55,7 @@ public class DynamicArray<Data>{
 		
 		// overcoming generic array creation error with a cast,
 		// as per lectures and http://stackoverflow.com/a/2924453/5395650
-		Data[] elements = (Data[]) new Object[capacity];
+		Item[] elements = (Item[]) new Object[capacity];
 		this.capacity = capacity;
 
 		for(int i = 0; i < n; i++){
