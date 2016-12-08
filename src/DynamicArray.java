@@ -1,13 +1,14 @@
 package com.matomatical.ads;
 
+@SuppressWarnings("unchecked")
 public class DynamicArray<Data>{
 
 	private static final int INITIAL_SIZE = 1;
 
 	private Data[] elements;
 	private int capacity, n;
-
-	public DynamicArray(){
+	
+	public DynamicArray() {
 		
 		// overcoming generic array creation error with a cast,
 		// as per lectures and http://stackoverflow.com/a/2924453/5395650
@@ -17,7 +18,7 @@ public class DynamicArray<Data>{
 		n = 0;
 	}
 
-	public Data get(int i){
+	public Data get(int i) throws IndexException {
 		if(i < n){
 			return elements[i];
 		} else {
@@ -25,7 +26,7 @@ public class DynamicArray<Data>{
 		}
 	}
 
-	public void set(int i, Data data){
+	public void set(int i, Data data) throws IndexException {
 		if(i < n){
 			elements[i] = data;
 		} else {
@@ -52,11 +53,14 @@ public class DynamicArray<Data>{
 
 	private void resize(int capacity){
 		
+		// overcoming generic array creation error with a cast,
+		// as per lectures and http://stackoverflow.com/a/2924453/5395650
 		Data[] elements = (Data[]) new Object[capacity];
+		this.capacity = capacity;
+
 		for(int i = 0; i < n; i++){
 			elements[i] = this.elements[i];
 		}
 		this.elements = elements;
-		this.capacity = capacity;
 	}
 }

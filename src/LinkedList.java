@@ -49,7 +49,7 @@ public class LinkedList<Data> {
 	 * @return the element from the beginning of the list
 	 * @throws EmptyException if there are no items in the list
 	 */
-	public Data remove() {
+	public Data remove() throws EmptyException {
 		if(length == 0){
 			throw new EmptyException("no items to remove");
 		}
@@ -71,7 +71,7 @@ public class LinkedList<Data> {
 	 * @return the element from the end of the list
 	 * @throws EmptyException if there are no items in the list
 	 */
-	public Data removeEnd() {
+	public Data removeEnd() throws EmptyException {
 		if(length == 0){
 			throw new EmptyException("no items to remove");
 		}
