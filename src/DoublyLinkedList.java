@@ -1,6 +1,9 @@
 package com.matomatical.ads;
 
-public class DoublyLinkedList<Item> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class DoublyLinkedList<Item> implements Iterable<Item> {
 	
 	private class Node {
 		public Item data;
@@ -104,5 +107,51 @@ public class DoublyLinkedList<Item> {
 	/** true iff there are no elements in the list */
 	public boolean isEmpty(){
 		return (first == null);
+	}
+
+	@Override
+	public Iterator<Item> iterator(){
+		return new DoublyLinkedListIterator(this.first);
+	}
+
+	public class DoublyLinkedListIterator implements Iterator<Item>{
+		Node next;
+
+		DoublyLinkedListIterator(Node first){
+			next = first;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return (next != null);
+		}
+
+		@Override
+		public Item next() throws NoSuchElementException {
+			if(next == null){
+				throw new NoSuchElementException();
+			}
+
+			Item data = next.data;
+			next = next.next;
+			return data;
+		}
+
+		@Override
+		public void remove() throws NoSuchElementException {
+			if(next == null){
+				throw new NoSuchElementException();
+			}
+
+			if(next.prev != null){
+				next.prev.next = next.next;
+				next.next.prev = next.prev;
+			} else {
+				DoublyLinkedList.this.first = next.next;
+				if(next.next == null){
+					DoublyLinkedList.this.last = null;
+				}
+			}
+		}
 	}
 }

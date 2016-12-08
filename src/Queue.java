@@ -1,6 +1,9 @@
 package com.matomatical.ads;
 
-public class Queue<Item> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+z
+public class Queue<Item> implements Iterable<Item> {
 	
 	private LinkedList<Item> list = new LinkedList<Item>();
 	
@@ -24,5 +27,10 @@ public class Queue<Item> {
 	/** rue iff the queue has no items in it */
 	public boolean isEmpty() {
 		return list.isEmpty();
+	}
+
+	@Override
+	public Iterator<Item> iterator(){
+		return list.iterator();
 	}
 }
