@@ -1,13 +1,15 @@
 package com.matomatical.ads;
 
-public class LinkedList<Data> {
+public class DoublyLinkedList<Data> {
 	
 	private class Node {
 		public Data data;
 		public Node(Data data) {
 			this.data = data;
+			this.next = null;
+			this.prev = null;
 		}
-		public Node next;
+		public Node next, prev;
 	}
 
 	private Node first = null;
@@ -19,9 +21,11 @@ public class LinkedList<Data> {
 	 */
 	public void add(Data data) {
 		Node node = new Node(data);
-		node.next = first;
-
-		if(last == null){
+		
+		if(first != null){
+			node.next = first;
+			first.prev = node;
+		} else {
 			last = node;
 		}
 		first = node;
@@ -34,12 +38,14 @@ public class LinkedList<Data> {
 	 */
 	public void addEnd(Data data) {
 		Node node = new Node(data);
-
+		
 		if(last != null){
 			last.next = node;
+			node.prev = last;
 		} else {
 			first = node;
 		}
+
 		last = node;
 
 		length++;
@@ -55,19 +61,20 @@ public class LinkedList<Data> {
 		}
 
 		Node node = first;
-		first = node.next;
-		length--;
 
-		if(first == null){
+		first = first.next;
+		if (first == null){
 			last = null;
+		} else {
+			first.prev = null;
 		}
 
+		length--;
 		return node.data;
 	}
 
 
-	/** Remove and return an element from the end of the list. O(n) where
-	 * n is the length of the list.
+	/** Remove and return an element from the end of the list. O(1)
 	 * @return the element from the end of the list
 	 * @throws EmptyException if there are no items in the list
 	 */
@@ -78,21 +85,14 @@ public class LinkedList<Data> {
 
 		Node node = last;
 
-		// the new last is the one pointing to this last node
-		Node i = first;
-		while(i != null){
-			if(i.next == node){
-				i.next = null;
-				last = i;
-			}
-			i = i.next;
-		}
-
-		length--;
+		last = last.prev;
 		if(last == null){
 			first = null;
+		} else {
+			last.next = null;
 		}
-
+		
+		length--;
 		return node.data;
 	}
 
@@ -103,6 +103,6 @@ public class LinkedList<Data> {
 
 	/** true iff there are no elements in the list */
 	public boolean isEmpty(){
-		return (length == 0);
+		return (first == null);
 	}
 }
