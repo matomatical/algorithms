@@ -45,6 +45,6 @@ test: build
 # 	# jar command
 
 # Removes all .class files, so that the next make rebuilds them
-clean: 
+clean:
 		rm -rf ./$(BIN)
 		$(RM) ./$(TESTD)/*.class

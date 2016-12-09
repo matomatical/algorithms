@@ -13,7 +13,7 @@ public class BinarySearcher {
 	 * appear. No exception is thrown if array is not sorted; this will cause
 	 * undefined behaviour.
 	 **/
-	public static <T> int search(T[] array, Comparable<T> key) {
+	public static <T extends Comparable<T>> int search(T[] array, T key) {
 		int lo = 0;
 		int hi = array.length - 1;
 
