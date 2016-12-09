@@ -5,25 +5,25 @@ import java.util.NoSuchElementException;
 
 public class DoublyLinkedList<Item> implements Iterable<Item> {
 	
-	private class Node {
+	private static class Node<Item> {
 		public Item data;
 		public Node(Item data) {
 			this.data = data;
 			this.next = null;
 			this.prev = null;
 		}
-		public Node next, prev;
+		public Node<Item> next, prev;
 	}
 
-	private Node first = null;
-	private Node last = null;
+	private Node<Item> first = null;
+	private Node<Item> last = null;
 	private int length = 0;
 
 	/** Add an element to the start of the list
 	 * @param data the element to add
 	 */
 	public void add(Item data) {
-		Node node = new Node(data);
+		Node<Item> node = new Node<Item>(data);
 		
 		if(first != null){
 			node.next = first;
@@ -40,7 +40,7 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
 	 * @param data the element to add
 	 */
 	public void addEnd(Item data) {
-		Node node = new Node(data);
+		Node<Item> node = new Node<Item>(data);
 		
 		if(last != null){
 			last.next = node;
@@ -63,7 +63,7 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
 			throw new EmptyException("no items to remove");
 		}
 
-		Node node = first;
+		Node<Item> node = first;
 
 		first = first.next;
 		if (first == null){
@@ -86,7 +86,7 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
 			throw new EmptyException("no items to remove");
 		}
 
-		Node node = last;
+		Node<Item> node = last;
 
 		last = last.prev;
 		if(last == null){
@@ -98,26 +98,26 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
 		length--;
 		return node.data;
 	}
-
+	
 	/** The number of elements in the list */
 	public int length() {
 		return length;
 	}
-
+	
 	/** true iff there are no elements in the list */
 	public boolean isEmpty(){
 		return (first == null);
 	}
-
+	
 	@Override
 	public Iterator<Item> iterator(){
 		return new DoublyLinkedListIterator(this.first);
 	}
-
+	
 	public class DoublyLinkedListIterator implements Iterator<Item>{
-		Node next;
+		Node<Item> next;
 
-		DoublyLinkedListIterator(Node first){
+		DoublyLinkedListIterator(Node<Item> first){
 			next = first;
 		}
 

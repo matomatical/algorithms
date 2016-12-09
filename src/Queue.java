@@ -2,7 +2,7 @@ package com.matomatical.ads;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-z
+
 public class Queue<Item> implements Iterable<Item> {
 	
 	private LinkedList<Item> list = new LinkedList<Item>();

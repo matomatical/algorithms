@@ -5,26 +5,26 @@ import java.util.NoSuchElementException;
 
 public class LinkedList<Item> implements Iterable<Item> {
 	
-	private class Node {
+	private static class Node<Item> {
 		public Item data;
 		public Node(Item data) {
 			this.data = data;
 		}
-		public Node next;
+		public Node<Item> next;
 	}
 
-	private Node first = null;
-	private Node last = null;
+	private Node<Item> first = null;
+	private Node<Item> last = null;
 	private int length = 0;
 
 	/** Add an element to the start of the list
 	 * @param data the element to add
 	 */
 	public void add(Item data) {
-		Node node = new Node(data);
+		Node<Item> node = new Node<Item>(data);
 		node.next = first;
 
-		if(last == null){
+		if (last == null) {
 			last = node;
 		}
 		first = node;
@@ -36,9 +36,9 @@ public class LinkedList<Item> implements Iterable<Item> {
 	 * @param data the element to add
 	 */
 	public void addEnd(Item data) {
-		Node node = new Node(data);
+		Node<Item> node = new Node<Item>(data);
 
-		if(last != null){
+		if (last != null) {
 			last.next = node;
 		} else {
 			first = node;
@@ -53,15 +53,15 @@ public class LinkedList<Item> implements Iterable<Item> {
 	 * @throws EmptyException if there are no items in the list
 	 */
 	public Item remove() throws EmptyException {
-		if(length == 0){
+		if (length == 0) {
 			throw new EmptyException("no items to remove");
 		}
 
-		Node node = first;
+		Node<Item> node = first;
 		first = node.next;
 		length--;
 
-		if(first == null){
+		if (first == null) {
 			last = null;
 		}
 
@@ -78,12 +78,12 @@ public class LinkedList<Item> implements Iterable<Item> {
 			throw new EmptyException("no items to remove");
 		}
 
-		Node node = last;
+		Node<Item> node = last;
 
 		// the new last is the one pointing to this last node
-		Node i = first;
-		while(i != null){
-			if(i.next == node){
+		Node<Item> i = first;
+		while (i != null) {
+			if (i.next == node) {
 				i.next = null;
 				last = i;
 			}
@@ -114,9 +114,9 @@ public class LinkedList<Item> implements Iterable<Item> {
 	}
 
 	public class LinkedListIterator implements Iterator<Item>{
-		Node next, prev = null;
+		Node<Item> next, prev = null;
 
-		LinkedListIterator(Node first){
+		LinkedListIterator(Node<Item> first){
 			next = first;
 		}
 
@@ -127,7 +127,7 @@ public class LinkedList<Item> implements Iterable<Item> {
 
 		@Override
 		public Item next() throws NoSuchElementException {
-			if(next == null){
+			if (next == null) {
 				throw new NoSuchElementException();
 			}
 
@@ -139,15 +139,15 @@ public class LinkedList<Item> implements Iterable<Item> {
 
 		@Override
 		public void remove() throws NoSuchElementException {
-			if(next == null){
+			if (next == null) {
 				throw new NoSuchElementException();
 			}
 
-			if(prev != null){
+			if (prev != null) {
 				prev.next = next.next;
 			} else {
 				LinkedList.this.first = next.next;
-				if(next.next == null){
+				if (next.next == null) {
 					LinkedList.this.last = null;
 				}
 			}
