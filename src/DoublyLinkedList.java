@@ -98,22 +98,22 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
 		length--;
 		return node.data;
 	}
-	
+
 	/** The number of elements in the list */
 	public int length() {
 		return length;
 	}
-	
+
 	/** true iff there are no elements in the list */
 	public boolean isEmpty(){
 		return (first == null);
 	}
-	
+
 	@Override
 	public Iterator<Item> iterator(){
 		return new DoublyLinkedListIterator(this.first);
 	}
-	
+
 	public class DoublyLinkedListIterator implements Iterator<Item>{
 		Node<Item> next;
 
@@ -129,7 +129,7 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
 		@Override
 		public Item next() throws NoSuchElementException {
 			if(next == null){
-				throw new NoSuchElementException();
+				throw new NoSuchElementException("List is already empty");
 			}
 
 			Item data = next.data;
@@ -139,19 +139,7 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
 
 		@Override
 		public void remove() throws NoSuchElementException {
-			if(next == null){
-				throw new NoSuchElementException();
-			}
-
-			if(next.prev != null){
-				next.prev.next = next.next;
-				next.next.prev = next.prev;
-			} else {
-				DoublyLinkedList.this.first = next.next;
-				if(next.next == null){
-					DoublyLinkedList.this.last = null;
-				}
-			}
+			throw new UnsupportedOperationException("Not yet implemented");
 		}
 	}
 }

@@ -9,6 +9,8 @@ import org.junit.BeforeClass;
 	BinarySearcherTest.class,
 	LinkedListTest.class,
 	DoublyLinkedListTest.class,
+	LinkedListIteratorTest.class,
+	DoublyLinkedListIteratorTest.class,
 })
 
 /** TestSuite; junit test class to run all unit tests

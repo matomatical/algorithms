@@ -328,6 +328,4 @@ public class DoublyLinkedListTest {
 
 		Assert.assertEquals(2, length);
 	}
-
-
 }

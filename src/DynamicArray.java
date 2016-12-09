@@ -50,7 +50,7 @@ public class DynamicArray<Item>{
 		}
 		return data;
 	}
-
+	
 	private void resize(int capacity){
 		
 		// overcoming generic array creation error with a cast,

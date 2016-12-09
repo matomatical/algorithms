@@ -28,7 +28,7 @@ public class Queue<Item> implements Iterable<Item> {
 	public boolean isEmpty() {
 		return list.isEmpty();
 	}
-
+	
 	@Override
 	public Iterator<Item> iterator(){
 		return list.iterator();

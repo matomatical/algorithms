@@ -128,7 +128,7 @@ public class LinkedList<Item> implements Iterable<Item> {
 		@Override
 		public Item next() throws NoSuchElementException {
 			if (next == null) {
-				throw new NoSuchElementException();
+				throw new NoSuchElementException("List is empty already");
 			}
 
 			Item data = next.data;
@@ -139,18 +139,7 @@ public class LinkedList<Item> implements Iterable<Item> {
 
 		@Override
 		public void remove() throws NoSuchElementException {
-			if (next == null) {
-				throw new NoSuchElementException();
-			}
-
-			if (prev != null) {
-				prev.next = next.next;
-			} else {
-				LinkedList.this.first = next.next;
-				if (next.next == null) {
-					LinkedList.this.last = null;
-				}
-			}
+			throw new UnsupportedOperationException("Not yet implemented");
 		}
 	}
 }

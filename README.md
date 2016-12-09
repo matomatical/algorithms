@@ -6,6 +6,7 @@ A collection of algorithms and data structure utility classes, created as self-a
 
 * **UnionFinder**, a class providing objects for fast `union` and `find` methods using path compression.
 * **BinarySearcher**, a class providing a static `search` method that searches a **sorted** array of comparables using binary search.
+* **LinkedList** and **DoublyLinkedList** classes providing low-level dynamic collections with methods to add/remove from the start/end of the list, and iterators.
 
 ## Testing
 
