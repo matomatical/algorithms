@@ -13,6 +13,7 @@ import org.junit.BeforeClass;
 	DoublyLinkedListIteratorTest.class,
 	StackTest.class,
 	QueueTest.class,
+	DynamicArrayTest.class,
 })
 
 /** TestSuite; junit test class to run all unit tests
