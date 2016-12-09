@@ -44,6 +44,27 @@ public class Sorts {
 		}
 	}
 
+	public static <T extends Comparable<T>> void insertionSort(T[] A) {
+		
+		// for every item in the array
+		for(int i = 1; i < A.length; i++){
+			
+			// pass through the first i-1 items looking for the right place
+			for(int j = i - 1; j >= 0; j--){
+				
+				if (less(A[j+1], A[j])) {
+					// as long as the item is above its correct place,
+					// continue to swap the item along the array
+					swap(A, j, j+1);
+				} else {
+					// when we find something the item isnt smaller than,
+					// we can finish inserting early
+					break;
+				}
+			}
+		}
+	}
+
 	// i thought of this really cool improvement over the basic bubble sort
 	// implementation.
 	// It's a way to avoid using a 'changed' flag and also skip some unecessary
@@ -89,7 +110,7 @@ public class Sorts {
 
 			// now, to prepare for the next iteration, set the new value of `i`
 			i = k;
-			
+
 			// the largest this can be is the current value of `i`, minus 1, 
 			// corresponding to a swap between the last two elements (of the 
 			// first `i` elements). This is the usual bubble sort decrement 
