@@ -1,6 +1,5 @@
 package com.matomatical.ads;
 
-@SuppressWarnings("unchecked")
 public class DynamicArray<Item>{
 
 	private static final int INITIAL_SIZE = 1;
@@ -8,6 +7,7 @@ public class DynamicArray<Item>{
 	private Item[] elements;
 	private int capacity, n;
 	
+	@SuppressWarnings("unchecked")
 	public DynamicArray() {
 		
 		// overcoming generic array creation error with a cast,
@@ -59,10 +59,12 @@ public class DynamicArray<Item>{
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void resize(int capacity) {
 
 		// don't let the capacity ever become zero
 		capacity = (capacity < 1 ? 1 : capacity);
+		
 		
 		// overcoming generic array creation error with a cast,
 		// as per lectures and http://stackoverflow.com/a/2924453/5395650
