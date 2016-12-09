@@ -9,6 +9,7 @@ A collection of algorithms and data structure utility classes, created as self-a
 * **LinkedList** and **DoublyLinkedList** classes providing low-level dynamic collections with methods to add/remove from the start/end of the list, and iterators.
 * **Queue** and **Stack** classes, built on top of **LinkedList** with the usual FIFO and LIFO semantics (respectively).
 * **DynamicArray** which allows regular array access and dynamically grows and shrinks as you add items at the end. Grows when full and shrinks when 1/4 full (to avoid thrashing).
+* **Sorts**, a collection of static `sort` methods that oprate on generic arrays.
 
 ## Testing
 

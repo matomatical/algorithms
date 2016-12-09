@@ -1,7 +1,14 @@
 package com.matomatical.ads;
 
+import java.util.Random;
+
 public class Sorts {
 
+	/** Checks whether the elements of A are sorted by their compareTo method
+	 * @param A generic array of objects to check
+	 * @return true iff the objects are in ascending order according to 
+	 * their compareTo() methods
+	 */
 	public static <T extends Comparable<T>> boolean isSorted(T[] A) {
 		// for every adjacent pair in the array
 		for (int i = 1; i < A.length; i++) {
@@ -15,6 +22,9 @@ public class Sorts {
 		return true;
 	}
 
+	/** Sorts the elements of A by their compareTo method, using selection sort
+	 * @param A generic array of objects to sort
+	 */
 	public static <T extends Comparable<T>> void selectionSort(T[] A) {
 		
 		// for every slot in the array
@@ -31,6 +41,9 @@ public class Sorts {
 		}
 	}
 
+	/** Sorts the elements of A by their compareTo method, using insertion sort
+	 * @param A generic array of objects to sort
+	 */
 	public static <T extends Comparable<T>> void insertionSort(T[] A) {
 		
 		// for every item in the array
@@ -57,13 +70,16 @@ public class Sorts {
 	// It's a way to avoid using a 'changed' flag and also skip some unecessary
 	// comparisons while still finishing early.
 	//
-	// While implementing, I wrote a lot of comments to crystalis my thought 
+	// While implementing, I wrote a lot of comments to crystalise my thought 
 	// process, and I've left them in so now the method has more comments than
 	// code.
 	// After implementing and testing the method, I looked it up to see if it
 	// has been done before (and of course it has). Wikipedia reports that the 
 	// improvement results in "about a worst case 50% improvement in comparison
 	// count (though no improvement in swap counts)", which makes sense!
+	/** Sorts the elements of A by their compareTo method, using bubble sort
+	 * @param A generic array of objects to sort
+	 */
 	public static <T extends Comparable<T>> void bubbleSort(T[] A) {
 		
 		// `i` will be the length of the section at the beginning of the array
@@ -71,17 +87,17 @@ public class Sorts {
 		int i = A.length;
 
 		// we will iterate until this section vanishes (and the array is sorted)
-		while (i > 0) {
+		// actually, we can finish as soon as it is 1 because the first element 
+		// is trivially sorted
+		while (i > 1) {
 
 			// we will track swaps with `k` to determine the right value of `i`
 			// for the next pass through the array. `k` begins at zero, and if 
-			// no swaps are made (or only the first two elements are swappaed)
-			// `i` will become zero and we will finish early!
+			// no swaps are made `i` will become zero and we will finish early!
 			int k = 0;
 
 			// work through all pairs with indices (`j-1`, `j`) in the
 			// possibly-unordered section, up to and including (i-2, i-1);
-
 			for (int j = 1; j < i; j++) {
 
 				// if we encounter an unordered pair, swap it
@@ -103,21 +119,42 @@ public class Sorts {
 			// first `i` elements). This is the usual bubble sort decrement 
 			// `i--`.
 
-			// therefore, eventually `k` will be 0 and we will break out 
+			// therefore, eventually `k` will be 1 or 0 and we will break out 
 			// of the while loop and finish the sorting algorithm.
 		}
 	}
 
+	private static Random rng = new Random();
+
+	/** Reorders the contents of A with approximate randomness
+	 * (just using java.util.Random with default seed)
+	 * @param A generic array of objects to shuffle
+	 */
+	public static <T> void shuffle(T[] A){
+		for (int i = 1; i < A.length; i++){
+			// pick a position between 0 and i inclusive
+			int r = rng.nextInt(i+1);
+			
+			// swap into that position
+			swap(A, i, r);
+		}
+	}
 
 	// this class should not be instantiated
 	private Sorts() {}
 
+	/** Exchanges the elements at position i and j of array A
+	 * @param A a generic array of objects
+	 * @param i the object at this position will end up in position j
+	 * @param j the object at this position will end up in position i
+	 */
 	private static <T> void swap(T[] A, int i, int j) {
 		T temp = A[i];
 		A[i] = A[j];
 		A[j] = temp;
 	}
 
+	/** true iff a is less than b according to a's compareTo() method */
 	private static <T extends Comparable<T>> boolean less(T a, T b) {
 		return (a.compareTo(b) < 0);
 	}
