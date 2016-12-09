@@ -209,7 +209,7 @@ public class SimpleSorts {
 	 * Nested class that wraps a Comparable Type T's compareTo() method in a
 	 * Comparator object.
 	 */
-	private static class ComparableComparator<T extends Comparable<T>> 
+	static class ComparableComparator<T extends Comparable<T>> 
 	implements Comparator<T> {
 		// Using this class to treat Comparable sorting methods as Comparator 
 		// sorts enables lower duplication of code throughout this class. in
@@ -219,7 +219,7 @@ public class SimpleSorts {
 			return a.compareTo(b);
 		}
 	}
-	
+
 	/** true iff a is less than b according to comparator's compare() method */
 	private static <T> boolean less(T a, T b, Comparator<T> comparator) {
 		return (comparator.compare(a, b) < 0);

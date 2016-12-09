@@ -1,5 +1,7 @@
 package com.matomatical.ads;
 
+import java.util.Comparator;
+
 public class MergeSort {
 
 	// this class should not be instantiated
@@ -10,11 +12,20 @@ public class MergeSort {
 	 * @param A generic array of objects to sort
 	 */
 	public static <T extends Comparable<T>> void sort(T[] A) {
+		sort(A, new SimpleSorts.ComparableComparator<T>());
+	}
+
+	/**
+	 * Sorts the elements of A by a custom comparator using merge sort
+	 * @param A generic array of objects to sort
+	 * @param comparator a comparator that can compare the objects in the array
+	 */
+	public static <T> void sort(T[] A, Comparator<T> comparator) {
 
 		@SuppressWarnings("unchecked")
 		T[] B = (T[]) new Comparable[A.length];
 
-		sort(A, 0, A.length, B);
+		sort(A, 0, A.length, comparator, B);
 	}
 
 	/**
@@ -23,10 +34,11 @@ public class MergeSort {
 	 * @param A generic array of objects to sort
 	 * @param lo the first index in the slice of A to sort
 	 * @param hi the last index (not included) in the slice of A to sort
+	 * @param comparator a comparator that can compare the objects in the array
 	 * @param B array of extra space for performing the merge
 	 */
-	private static <T extends Comparable<T>> void sort(T[] A,
-			int lo, int hi, T[] B) {
+	private static <T> void sort(T[] A,
+			int lo, int hi, Comparator<T> comparator, T[] B) {
 
 		// base case: less than 2 items are trivially sorted, done!
 		if (hi - lo < 2) {
@@ -36,9 +48,9 @@ public class MergeSort {
 		// recursive case: we can sort two halves recursively, then merge to
 		// sort this slice
 		int mid = (lo + hi) / 2;
-		sort(A, lo, mid, B);
-		sort(A, mid, hi, B);
-		merge(A, lo, mid, hi, B);
+		sort(A, lo, mid, comparator, B);
+		sort(A, mid, hi, comparator, B);
+		merge(A, lo, mid, hi, comparator, B);
 	}
 
 	/** 
@@ -49,11 +61,12 @@ public class MergeSort {
 	 * @param mid the last index (not included) of the first slice to merge,
 	 * 	also the first index of the second slice to merge
 	 * @param hi the last index (not included) in the second slice of A to merge
+	 * @param comparator a comparator that can compare the objects in the array
 	 * @param B array of extra space for performing the merge (between lo and hi
 	 * 	may be used)
 	 */
-	private static <T extends Comparable<T>> void merge(T[] A,
-			int lo, int mid, int hi, T[] B) {
+	private static <T> void merge(T[] A,
+			int lo, int mid, int hi, Comparator<T> comparator, T[] B) {
 		
 		// track positions in 1st slice, 2nd slice of A, and B (respectively)
 		int i = lo, j = mid, k = lo;
@@ -62,7 +75,7 @@ public class MergeSort {
 		while(i < mid && j < hi){
 			// break ties with lo side for stability:
 			// only take hi side if strictly less
-			if(less(A[j], A[i])) {
+			if(less(A[j], A[i], comparator)) {
 				B[k++] = A[j++];
 			} else {
 				B[k++] = A[i++];
@@ -87,18 +100,8 @@ public class MergeSort {
 		}
 	}
 
-
-
-	/** true iff a is less than b according to a's compareTo() method */
-	private static <T extends Comparable<T>> boolean less(T a, T b) {
-		return (a.compareTo(b) < 0);
-	}
-
-	public static void main(String[] args) {
-		Integer[] A = {8, 6, 4, 5, 7, 3, 0, 2};
-		MergeSort.sort(A);
-		for(int i : A){
-			System.out.println(i);
-		}
+	/** true iff a is less than b according to comparator's compare() method */
+	private static <T> boolean less(T a, T b, Comparator<T> comparator) {
+		return (comparator.compare(a, b) < 0);
 	}
 }
