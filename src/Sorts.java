@@ -2,19 +2,6 @@ package com.matomatical.ads;
 
 public class Sorts {
 
-	// this class should not be instantiated
-	private Sorts() {}
-
-	private static <T> void swap(T[] A, int i, int j) {
-		T temp = A[i];
-		A[i] = A[j];
-		A[j] = temp;
-	}
-
-	private static <T extends Comparable<T>> boolean less(T a, T b) {
-		return (a.compareTo(b) < 0);
-	}
-
 	public static <T extends Comparable<T>> boolean isSorted(T[] A) {
 		// for every adjacent pair in the array
 		for (int i = 1; i < A.length; i++) {
@@ -93,7 +80,7 @@ public class Sorts {
 			int k = 0;
 
 			// work through all pairs with indices (`j-1`, `j`) in the
-			// possibly-unordered section
+			// possibly-unordered section, up to and including (i-2, i-1);
 
 			for (int j = 1; j < i; j++) {
 
@@ -101,10 +88,10 @@ public class Sorts {
 				if (less(A[j], A[j-1])) {
 					swap(A, j, j-1);
 
-					// but also record the value of `j-1` in `k`, because if no 
+					// but also record the value of `j` in `k`, because if no 
 					// more swaps are made during this pass, we can be certain
 					// that everything after index `j-1` is already sorted!
-					k = j-1;
+					k = j;
 				}
 			}
 
@@ -119,5 +106,19 @@ public class Sorts {
 			// therefore, eventually `k` will be 0 and we will break out 
 			// of the while loop and finish the sorting algorithm.
 		}
+	}
+
+
+	// this class should not be instantiated
+	private Sorts() {}
+
+	private static <T> void swap(T[] A, int i, int j) {
+		T temp = A[i];
+		A[i] = A[j];
+		A[j] = temp;
+	}
+
+	private static <T extends Comparable<T>> boolean less(T a, T b) {
+		return (a.compareTo(b) < 0);
 	}
 }
