@@ -6,7 +6,6 @@ import com.matomatical.ads.EmptyException;
 
 public class DoublyLinkedListTest {
 
-
 	@Test
 	public void addingThenRemovingShouldGiveSameElement(){
 		DoublyLinkedList<String> list = new DoublyLinkedList<String>();
