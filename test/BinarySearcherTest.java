@@ -5,19 +5,11 @@ import com.matomatical.ads.BinarySearcher;
 
 public class BinarySearcherTest {
 	
-	// helper class for comparing integers during tests
-	class IntegerComparer implements BinarySearcher.Comparer<Integer> {
-		public int compare(Integer a, Integer b){
-			return a.compareTo(b);
-		}
-	}
-	private IntegerComparer comparer = new IntegerComparer();
-
 	@Test
 	public void searchShouldReturnMinusOneIfNotFound() {
 		Integer[] array = {1, 2, 3, 4, 6, 7, 8, 9};
 
-		int i = BinarySearcher.search(array, 5, comparer);
+		int i = BinarySearcher.search(array, 5);
 
 		Assert.assertEquals(-1, i);
 	}
@@ -26,7 +18,7 @@ public class BinarySearcherTest {
 	public void searchShouldFindItemInList() {
 		Integer[] array = {1, 2, 3, 4, 6, 7, 8, 9};
 
-		int i = BinarySearcher.search(array, 4, comparer);
+		int i = BinarySearcher.search(array, 4);
 
 		Assert.assertEquals(3, i);
 	}
@@ -35,7 +27,7 @@ public class BinarySearcherTest {
 	public void searchShouldFindFirstElementOddArray() {
 		Integer[] array = {1, 2, 3};
 
-		int i = BinarySearcher.search(array, 1, comparer);
+		int i = BinarySearcher.search(array, 1);
 
 		Assert.assertEquals(0, i);
 	}
@@ -44,7 +36,7 @@ public class BinarySearcherTest {
 	public void searchShouldFindFirstElementEvenArray() {
 		Integer[] array = {1, 2, 3, 4};
 
-		int i = BinarySearcher.search(array, 1, comparer);
+		int i = BinarySearcher.search(array, 1);
 
 		Assert.assertEquals(0, i);
 	}
@@ -53,7 +45,7 @@ public class BinarySearcherTest {
 	public void searchShouldFindLastElementOddArray() {
 		Integer[] array = {1, 2, 3};
 
-		int i = BinarySearcher.search(array, 3, comparer);
+		int i = BinarySearcher.search(array, 3);
 
 		Assert.assertEquals(2, i);
 	}
@@ -62,9 +54,8 @@ public class BinarySearcherTest {
 	public void searchShouldFindLastElementEvenArray() {
 		Integer[] array = {1, 2, 3, 4};
 
-		int i = BinarySearcher.search(array, 4, comparer);
+		int i = BinarySearcher.search(array, 4);
 
 		Assert.assertEquals(3, i);
 	}
-
 }

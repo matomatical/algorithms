@@ -2,6 +2,10 @@ package com.matomatical.ads;
 
 public class BinarySearcher {
 
+	// private constructor to prevent instantiation, this class should
+	// not be instantiated
+	private BinarySearcher() {}
+
 	/** Search a **sorted** array of objects for a key using binary search.
 	 * @param array Sorted array of objects
 	 * @param key An object comparable to those in array to look for
@@ -9,14 +13,14 @@ public class BinarySearcher {
 	 * appear. No exception is thrown if array is not sorted; this will cause
 	 * undefined behaviour.
 	 **/
-	public static <T> int search(T[] array, T key, Comparer<T> comparer){
+	public static <T> int search(T[] array, Comparable<T> key) {
 		int lo = 0;
 		int hi = array.length - 1;
 
 		while(hi >= lo) {
 			
 			int mid = (lo + hi) / 2;
-			int comparison = comparer.compare(key, array[mid]);
+			int comparison = key.compareTo(array[mid]);
 
 			if(comparison < 0){
 				// key is below array[mid] so we can throw out the high half
@@ -34,14 +38,6 @@ public class BinarySearcher {
 
 		// if hi passes lo, key is not in the array so return -1
 		return -1;
-	}
-
-	public interface Comparer<T> {
-		/** Compares two objects a and b, returning:
-		 * @return 0 iff a equals b, negative iff a is less than b,
-		 * positive iff a is greater than b
-		 */
-		public int compare(T a, T b);
 	}
 }
 
