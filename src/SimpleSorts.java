@@ -1,41 +1,57 @@
 package com.matomatical.ads;
 
 import java.util.Random;
+import java.util.Comparator;
 
 public class SimpleSorts {
 
 	// this class should not be instantiated
 	private SimpleSorts() {}
 
-	/** Checks whether the elements of A are sorted by their compareTo method
-	 * @param A generic array of objects to check
+	/**
+	 * Checks whether the elements of A are sorted by a custom comparator
+	 * @param A a generic array of objects to check
+	 * @param comparator a comparator that can compare the objects in the array
 	 * @return true iff the objects are in ascending order according to 
 	 * their compareTo() methods
 	 */
-	public static <T extends Comparable<T>> boolean isSorted(T[] A) {
+	public static <T> boolean isSorted(T[] A, Comparator<T> comparator) {
 		// for every adjacent pair in the array
 		for (int i = 1; i < A.length; i++) {
 			// is this pair out of order?
 			// (note: !less would fail on duplicates)
-			if ( less(A[i], A[i-1])) {
+			if ( less(A[i], A[i-1], comparator)) {
 				return false;
 			}
 		}
 		// if no pairs were out of order, then we are sorted!
 		return true;
 	}
-
-	/** Sorts the elements of A by their compareTo method, using selection sort
-	 * @param A generic array of objects to sort
+	
+	/**
+	 * Checks whether the elements of A are sorted by their compareTo method
+	 * @param A generic array of objects to check
+	 * @return true iff the objects are in ascending order according to 
+	 * their compareTo() methods
 	 */
-	public static <T extends Comparable<T>> void selectionSort(T[] A) {
-		
+	public static <T extends Comparable<T>> boolean isSorted(T[] A) {
+		return isSorted(A, new ComparableComparator<T>());
+	}
+
+
+
+	/**
+	 * Sorts the elements of A by a custom comparator using selection sort
+	 * @param A generic array of objects to sort
+	 * @param comparator a comparator that can compare the objects in the array
+	 */
+	public static <T> void selectionSort(T[] A, Comparator<T> comparator) {
 		// for every slot in the array
 		for(int i = 0; i < A.length; i++){
 			// find the smallest item remaining ...
 			int min = i;
 			for(int j = i + 1; j < A.length; j++){
-				if (less(A[j], A[min])) {
+				if (less(A[j], A[min], comparator)) {
 					min = j;
 				}
 			}
@@ -44,18 +60,29 @@ public class SimpleSorts {
 		}
 	}
 
-	/** Sorts the elements of A by their compareTo method, using insertion sort
+	/**
+	 * Sorts the elements of A by their compareTo method, using selection sort
 	 * @param A generic array of objects to sort
 	 */
-	public static <T extends Comparable<T>> void insertionSort(T[] A) {
-		
+	public static <T extends Comparable<T>> void selectionSort(T[] A) {
+		selectionSort(A, new ComparableComparator<T>());
+	}
+
+
+
+	/**
+	 * Sorts the elements of A by a custom comparator using insertion sort
+	 * @param A generic array of objects to sort
+	 * @param comparator a comparator that can compare the objects in the array
+	 */
+	public static <T> void insertionSort(T[] A, Comparator<T> comparator) {
 		// for every item in the array
 		for(int i = 1; i < A.length; i++){
 			
 			// pass through the first i-1 items looking for the right place
 			for(int j = i - 1; j >= 0; j--){
 				
-				if (less(A[j+1], A[j])) {
+				if (less(A[j+1], A[j], comparator)) {
 					// as long as the item is above its correct place,
 					// continue to swap the item along the array
 					swap(A, j, j+1);
@@ -67,6 +94,16 @@ public class SimpleSorts {
 			}
 		}
 	}
+
+	/**
+	 * Sorts the elements of A by their compareTo method, using insertion sort
+	 * @param A generic array of objects to sort
+	 */
+	public static <T extends Comparable<T>> void insertionSort(T[] A) {
+		insertionSort(A, new ComparableComparator<T>());
+	}
+
+
 
 	// i thought of this really cool improvement over the basic bubble sort
 	// implementation.
@@ -80,11 +117,12 @@ public class SimpleSorts {
 	// has been done before (and of course it has). Wikipedia reports that the 
 	// improvement results in "about a worst case 50% improvement in comparison
 	// count (though no improvement in swap counts)", which makes sense!
-	/** Sorts the elements of A by their compareTo method, using bubble sort
+	/**
+	 * Sorts the elements of A by a custom comparator using bubble sort
 	 * @param A generic array of objects to sort
+	 * @param comparator a comparator that can compare the objects in the array
 	 */
-	public static <T extends Comparable<T>> void bubbleSort(T[] A) {
-		
+	public static <T> void bubbleSort(T[] A, Comparator<T> comparator) {
 		// `i` will be the length of the section at the beginning of the array
 		// which may contain out-of-order pairs
 		int i = A.length;
@@ -104,7 +142,7 @@ public class SimpleSorts {
 			for (int j = 1; j < i; j++) {
 
 				// if we encounter an unordered pair, swap it
-				if (less(A[j], A[j-1])) {
+				if (less(A[j], A[j-1], comparator)) {
 					swap(A, j, j-1);
 
 					// but also record the value of `j` in `k`, because if no 
@@ -127,6 +165,16 @@ public class SimpleSorts {
 		}
 	}
 
+	/**
+	 * Sorts the elements of A by their compareTo method, using bubble sort
+	 * @param A generic array of objects to sort
+	 */
+	public static <T extends Comparable<T>> void bubbleSort(T[] A) {
+		bubbleSort(A, new ComparableComparator<T>());
+	}
+
+
+
 	private static Random rng = new Random();
 
 	/** Reorders the contents of A with approximate randomness
@@ -143,6 +191,8 @@ public class SimpleSorts {
 		}
 	}
 
+
+
 	/** Exchanges the elements at position i and j of array A
 	 * @param A a generic array of objects
 	 * @param i the object at this position will end up in position j
@@ -154,8 +204,24 @@ public class SimpleSorts {
 		A[j] = temp;
 	}
 
-	/** true iff a is less than b according to a's compareTo() method */
-	private static <T extends Comparable<T>> boolean less(T a, T b) {
-		return (a.compareTo(b) < 0);
+
+	/**
+	 * Nested class that wraps a Comparable Type T's compareTo() method in a
+	 * Comparator object.
+	 */
+	private static class ComparableComparator<T extends Comparable<T>> 
+	implements Comparator<T> {
+		// Using this class to treat Comparable sorting methods as Comparator 
+		// sorts enables lower duplication of code throughout this class. in
+		// particular, each algorithm is only implemented once, though it is
+		// accessible through more than one method
+		public int compare(T a, T b){
+			return a.compareTo(b);
+		}
+	}
+	
+	/** true iff a is less than b according to comparator's compare() method */
+	private static <T> boolean less(T a, T b, Comparator<T> comparator) {
+		return (comparator.compare(a, b) < 0);
 	}
 }
