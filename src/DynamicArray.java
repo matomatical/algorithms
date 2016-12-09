@@ -19,29 +19,37 @@ public class DynamicArray<Item>{
 	}
 
 	public Item get(int i) throws IndexException {
-		if(i < n){
-			return elements[i];
-		} else {
+		if(i < 0 || i >= n){
 			throw new IndexException("Index " + i + " out of bounds");
 		}
+		
+		return elements[i];
 	}
 
 	public void set(int i, Item data) throws IndexException {
-		if(i < n){
-			elements[i] = data;
-		} else {
+		if(i < 0 || i > n){
 			throw new IndexException("Index " + i + " out of bounds");
+		}
+
+		// if what would be the next element is indexed,
+		// we should automatically add an index
+		if(i == n){
+			this.add(data);
+
+		// otherwise just modify as usual
+		} else {
+			elements[i] = data;	
 		}
 	}
 
-	public void add(Item data){
+	public void add(Item data) {
 		elements[n++] = data;
 		if(n==capacity){
 			resize(n * 2);
 		}
 	}
 
-	public Item remove(){
+	public Item remove() {
 		Item data = elements[--n];
 		elements[n] = null;
 
@@ -51,7 +59,7 @@ public class DynamicArray<Item>{
 		return data;
 	}
 	
-	private void resize(int capacity){
+	private void resize(int capacity) {
 		
 		// overcoming generic array creation error with a cast,
 		// as per lectures and http://stackoverflow.com/a/2924453/5395650
