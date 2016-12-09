@@ -45,26 +45,46 @@ public class Sorts {
 	}
 
 	public static <T extends Comparable<T>> void bubbleSort(T[] A) {
-		
-		// make one pass for each element in the array
-		for(int i = A.length; i > 0; i--){
-			// track whether we make any changes
-			boolean changed = false;
+		// in this experimental implementation of bubble sort we're going to 
+		// try to avoid using a 'changed' flag and also skip some unecessary 
+		// comparisons
 
-			// for each pair in the possibly unsorted section,
-			// swap it (and record a change) if out of order 
-			for(int j = 1; j < i; j++){
+		// i will be the length of the section at the beginning of the array
+		// which may contain out-of-order pairs
+		int i = A.length;
 
+		// we will iterate until this section vanishes (and the array is sorted)
+		while (i > 0) {
+
+			// we will track swaps with k to determine the right value of i for 
+			// the next pass through the array. k begins at zero, and if no
+			// swaps are made, i will become zero and we will finish early
+			int k = 0;
+
+			// work through all pairs with indices (j-1, j) in the
+			// possibly-unordered section
+
+			for (int j = 1; j < i; j++) {
+
+				// if we encounter an unordered pair, swap it
 				if (less(A[j], A[j-1])) {
 					swap(A, j, j-1);
-					changed = true;
+
+					// but also record the value of j-1 in k, because if no 
+					// more swaps are made during this pass, we can be certain
+					// that everything after index j-1 is already sorted
+					k = j-1;
 				}
 			}
 
-			// if there were no changes, we can finish early
-			if (changed == false){
-				break;
-			}
+			// now, to prepare for the next iteration, take the new value of i
+			// stored in k.
+			i = k;
+			// the largest this can be is the current value of i minus 1, 
+			// corresponding to a swap between the last two elements (of the first i elements). This is the usual bubble sort decrement i--.
+
+			// eventually, k will be 0 (no swaps made) and we will break out of
+			// the while loop and finish the sorting algorithm.
 		}
 	}
 }
