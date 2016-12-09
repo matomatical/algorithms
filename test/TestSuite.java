@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 	StackTest.class,
 	QueueTest.class,
 	DynamicArrayTest.class,
-	SortsTest.class,
+	SimpleSortsTest.class,
 })
 
 /** TestSuite; junit test class to run all unit tests

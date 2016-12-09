@@ -2,7 +2,10 @@ package com.matomatical.ads;
 
 import java.util.Random;
 
-public class Sorts {
+public class SimpleSorts {
+
+	// this class should not be instantiated
+	private SimpleSorts() {}
 
 	/** Checks whether the elements of A are sorted by their compareTo method
 	 * @param A generic array of objects to check
@@ -139,9 +142,6 @@ public class Sorts {
 			swap(A, i, r);
 		}
 	}
-
-	// this class should not be instantiated
-	private Sorts() {}
 
 	/** Exchanges the elements at position i and j of array A
 	 * @param A a generic array of objects

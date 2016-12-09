@@ -1,15 +1,15 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.matomatical.ads.Sorts;
+import com.matomatical.ads.SimpleSorts;
 
-public class SortsTest {
+public class SimpleSortsTest {
 
 	@Test
 	public void isSortedOnSortedListShouldBeTrue() {
 		Integer[] array = {1, 2, 3, 4, 6, 8, 10};
 		
-		boolean sorted = Sorts.isSorted(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -18,7 +18,7 @@ public class SortsTest {
 	public void isSortedOnSortedListWithDuplicatesShouldBeTrue() {
 		Integer[] array = {1, 2, 3, 4, 4, 6, 8, 8, 8, 10};
 		
-		boolean sorted = Sorts.isSorted(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -27,7 +27,7 @@ public class SortsTest {
 	public void isSortedOnUnsortedListLastElementShouldBeFalse() {
 		Integer[] array = {1, 2, 3, 4, 6, 8, 10, 0};
 		
-		boolean sorted = Sorts.isSorted(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertFalse(sorted);
 	}
@@ -36,7 +36,7 @@ public class SortsTest {
 	public void isSortedOnUnsortedListFirstElementShouldBeFalse() {
 		Integer[] array = {3, 2, 3, 4, 6, 8, 10};
 		
-		boolean sorted = Sorts.isSorted(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertFalse(sorted);
 	}
@@ -45,7 +45,7 @@ public class SortsTest {
 	public void isSortedOnReverseSortedListShouldBeFalse() {
 		Integer[] array = {3, 2, 1, -1};
 		
-		boolean sorted = Sorts.isSorted(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertFalse(sorted);
 	}
@@ -54,8 +54,8 @@ public class SortsTest {
 	public void selectionSortOnSortedArrayShouldSort() {
 		Integer[] array = {1, 2, 3, 4, 5};
 
-		Sorts.selectionSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.selectionSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -64,8 +64,8 @@ public class SortsTest {
 	public void selectionSortOnReverseSortedArrayShouldSort() {
 		Integer[] array = {5, 4, 3, 2, 1};
 
-		Sorts.selectionSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.selectionSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -74,8 +74,8 @@ public class SortsTest {
 	public void selectionSortOnUnsortedArrayShouldSort() {
 		Integer[] array = {3, 2, 5, 4, 1};
 
-		Sorts.selectionSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.selectionSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -84,8 +84,8 @@ public class SortsTest {
 	public void selectionSortOnArrayWithDuplicatesShouldSort() {
 		Integer[] array = {3, 2, 4, 3, 5};
 
-		Sorts.selectionSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.selectionSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -94,8 +94,8 @@ public class SortsTest {
 	public void selectionSortOnArrayWithManyDuplicatedShouldSort() {
 		Integer[] array = {3, 2, 2, 2, 3, 3, 4, 6, 1, 2};
 
-		Sorts.selectionSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.selectionSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -104,8 +104,8 @@ public class SortsTest {
 	public void insertionSortOnSortedArrayShouldSort() {
 		Integer[] array = {1, 2, 3, 4, 5};
 
-		Sorts.insertionSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.insertionSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -114,8 +114,8 @@ public class SortsTest {
 	public void insertionSortOnReverseSortedArrayShouldSort() {
 		Integer[] array = {5, 4, 3, 2, 1};
 
-		Sorts.insertionSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.insertionSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -124,8 +124,8 @@ public class SortsTest {
 	public void insertionSortOnUnsortedArrayShouldSort() {
 		Integer[] array = {3, 2, 5, 4, 1};
 
-		Sorts.insertionSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.insertionSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -134,8 +134,8 @@ public class SortsTest {
 	public void insertionSortOnArrayWithDuplicatesShouldSort() {
 		Integer[] array = {3, 2, 4, 3, 5};
 
-		Sorts.insertionSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.insertionSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -144,8 +144,8 @@ public class SortsTest {
 	public void insertionSortOnArrayWithManyDuplicatedShouldSort() {
 		Integer[] array = {3, 2, 2, 2, 3, 3, 4, 6, 1, 2};
 
-		Sorts.insertionSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.insertionSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -154,8 +154,8 @@ public class SortsTest {
 	public void bubbleSortOnSortedArrayShouldSort() {
 		Integer[] array = {1, 2, 3, 4, 5};
 
-		Sorts.bubbleSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.bubbleSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -164,8 +164,8 @@ public class SortsTest {
 	public void bubbleSortOnReverseSortedArrayShouldSort() {
 		Integer[] array = {5, 4, 3, 2, 1};
 
-		Sorts.bubbleSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.bubbleSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -174,8 +174,8 @@ public class SortsTest {
 	public void bubbleSortOnUnsortedArrayShouldSort() {
 		Integer[] array = {3, 2, 5, 4, 1};
 
-		Sorts.bubbleSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.bubbleSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -184,8 +184,8 @@ public class SortsTest {
 	public void bubbleSortOnArrayWithDuplicatesShouldSort() {
 		Integer[] array = {3, 2, 4, 3, 5};
 
-		Sorts.bubbleSort(array);
-		boolean sorted = Sorts.isSorted(array);
+		SimpleSorts.bubbleSort(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -194,9 +194,9 @@ public class SortsTest {
 	public void bubbleSortOnArrayWithManyDuplicatedShouldSort() {
 		Integer[] array = {3, 2, 2, 2, 3, 3, 4, 6, 1, 2};
 
-		Sorts.bubbleSort(array);
+		SimpleSorts.bubbleSort(array);
 
-		boolean sorted = Sorts.isSorted(array);
+		boolean sorted = SimpleSorts.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
