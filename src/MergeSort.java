@@ -29,7 +29,7 @@ public class MergeSort {
 	}
 
 	/**
-	 * Recirsively sort the elements of A between indices lo and hi using merge
+	 * Recursively sort the elements of A between indices lo and hi using merge
 	 * sort
 	 * @param A generic array of objects to sort
 	 * @param lo the first index in the slice of A to sort
