@@ -1,20 +1,18 @@
-# A simple makefile for compiling java classes Adapted from
-# https://www.cs.swarthmore.edu/~newhall/unixhelp/howto_makefiles.html#java
+# A simple makefile for command line compiling and testing of java classes
+# based on my project set up
 #
 # Matt Farrugia
 
-# java compiler
+# java compiler and virtual machine
 JCC = javac
-
-# java virtual machine
 JVM = java
 
-# source, build, jar, and test directories
+# source, build, and jar directories
 SRC = src
 BIN = bin
-
 JAR = jar
 
+# test configuration (directory of tests, test runner class, test suite)
 TESTD = test
 RUNNER = org.junit.runner.JUnitCore
 SUITE = TestSuite
@@ -48,7 +46,7 @@ test: build-tests
 test-v: build-tests
 	$(JVM) $(TFLAGS) $(RUNNER) $(SUITE) | more
 
-# Bundle up the classes into a jar file
+# Bundle up the classes into a jar file TODO
 # jar: build
 # 	mkdir -p $(JAR)
 # 	# jar command
