@@ -16,5 +16,5 @@ A collection of algorithms and data structure utility classes, created as self-a
 
 ## Testing
 
-Run `make test` from the root directory to build the project, build the tests, and run the tests with jUnit.
+Run `make test` from the root directory to build the project, build the tests, and run the tests with jUnit. With this target, test output will be filtered not to show extensive stack traces. To show full output, use `make test-v` (v for verbose).
 

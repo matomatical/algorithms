@@ -16,14 +16,16 @@ BIN = bin
 JAR = jar
 
 TESTD = test
-SUITE = TestSuite
 RUNNER = org.junit.runner.JUnitCore
+SUITE = TestSuite
+# filter for test output: to remove stack traces from failed tests
+FILTER = sed '/^	at/d'
 
 # compilation flags
 # the -g flag compiles with debugging information
 # the -cp flag sets the class path
 # the -d flad sets the output directory
-JFLAGS = -g -cp "./$(SRC)/" -d $(BIN)
+JFLAGS = -g -Xlint:unchecked -cp "./$(SRC)/" -d $(BIN)
 TFLAGS = -cp "./$(BIN)/:./$(TESTD):./$(TESTD)/jar/junit.jar:./$(TESTD)/jar/hamcrest.jar"
 
 default: build
@@ -33,11 +35,18 @@ build:
 		mkdir -p $(BIN)
 		$(JCC) $(JFLAGS) $(SRC)/*.java
 
-# Build and run JUnit tests
-test: build
+# build project then JUnit tests
+build-tests: build
 	$(JCC) $(TFLAGS) $(TESTD)/$(SUITE).java
-	$(JVM) $(TFLAGS) $(RUNNER) $(SUITE)
 
+# Build and run JUnit tests
+test: build-tests
+	$(JVM) $(TFLAGS) $(RUNNER) $(SUITE) | $(FILTER) | more
+
+# Build and run JUnit tests without filtering output, saving output to a file
+# and opening that file
+test-v: build-tests
+	$(JVM) $(TFLAGS) $(RUNNER) $(SUITE) | more
 
 # Bundle up the classes into a jar file
 # jar: build
