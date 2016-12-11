@@ -10,7 +10,9 @@ A collection of algorithms and data structure utility classes, created as self-a
 * **Queue** and **Stack** classes, built on top of **LinkedList** with the usual FIFO and LIFO semantics (respectively).
 * **DynamicArray** which allows regular array access and dynamically grows and shrinks as you add items at the end. Grows when full and shrinks when 1/4 full (to avoid thrashing).
 * **SimpleSorts**, a collection of static `sort` methods that operate on generic arrays of Comparable objects, or with Comparators.
-* **MergeSort** and **Quicksort**, static `sort` methods that operate on a generic array of Comparable objects, or with a Comparator.
+* **MergeSort** and **Quicksort**, classes with static `sort` methods that operate on a generic array of Comparable objects, or with a Comparator.
+* **PriorityQueue** class, using a max heap built with a **DynamicArray**.
+* **HeapSort**, a class with a static `sort` method that operated on a generic array of Comparable objects, sorting them using a **PriorityQueue**.
 
 ## Testing
 

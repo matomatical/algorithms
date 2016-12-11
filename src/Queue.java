@@ -8,8 +8,8 @@ public class Queue<Item> implements Iterable<Item> {
 	private LinkedList<Item> list = new LinkedList<Item>();
 	
 	/** Add an item to the end of the queue */
-	public void enqueue(Item data) {
-		list.addEnd(data);
+	public void enqueue(Item item) {
+		list.addEnd(item);
 	}
 	
 	/** Remove the frontmost item from the queue
@@ -24,7 +24,7 @@ public class Queue<Item> implements Iterable<Item> {
 		return list.length();
 	}
 	
-	/** rue iff the queue has no items in it */
+	/** true iff the queue has no items in it */
 	public boolean isEmpty() {
 		return list.isEmpty();
 	}

@@ -8,8 +8,8 @@ public class Stack<Item> implements Iterable<Item> {
 	private LinkedList<Item> list = new LinkedList<Item>();
 
 	/** Add an item to the top of the stack */
-	public void push(Item data) {
-		list.add(data);
+	public void push(Item item) {
+		list.add(item);
 	}
 	
 	/** Remove the topmost item from the stack
