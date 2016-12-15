@@ -2,7 +2,7 @@ package com.matomatical.ads;
 
 import java.util.Comparator;
 
-public class MergeSort {
+public class MergeSort extends Sort {
 
 	// this class should not be instantiated
 	private MergeSort() {}
@@ -12,7 +12,7 @@ public class MergeSort {
 	 * @param A generic array of objects to sort
 	 */
 	public static <T extends Comparable<T>> void sort(T[] A) {
-		sort(A, new SimpleSorts.ComparableComparator<T>());
+		sort(A, new ComparableComparator<T>());
 	}
 
 	/**
@@ -98,10 +98,5 @@ public class MergeSort {
 		for(int l = lo; l < k; l++){
 			A[l] = B[l];
 		}
-	}
-
-	/** true iff a is less than b according to comparator's compare() method */
-	private static <T> boolean less(T a, T b, Comparator<T> comparator) {
-		return (comparator.compare(a, b) < 0);
 	}
 }

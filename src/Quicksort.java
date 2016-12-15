@@ -3,7 +3,7 @@ package com.matomatical.ads;
 import java.util.Random;
 import java.util.Comparator;
 
-public class Quicksort {
+public class Quicksort extends Sort {
 
 	// this class should not be instantiated
 	private Quicksort() {}
@@ -13,7 +13,7 @@ public class Quicksort {
 	 * @param A generic array of objects to sort
 	 */
 	public static <T extends Comparable<T>> void sort(T[] A) {
-		sort(A, new SimpleSorts.ComparableComparator<T>());
+		sort(A, new ComparableComparator<T>());
 	}
 
 	/**
@@ -101,22 +101,5 @@ public class Quicksort {
 	private static class Partition {
 		public int i, j;
 		public Partition(int i, int j) { this.i = i; this.j = j; }
-	}
-
-	/** Exchanges the elements at position i and j of array A
-	 * @param A a generic array of objects
-	 * @param i the object at this position will end up in position j
-	 * @param j the object at this position will end up in position i
-	 */
-	private static <T> void swap(T[] A, int i, int j) {
-		T temp = A[i];
-		A[i] = A[j];
-		A[j] = temp;
-	}
-
-
-	/** true iff a is less than b according to comparator's compare() method */
-	private static <T> boolean less(T a, T b, Comparator<T> comparator) {
-		return (comparator.compare(a, b) < 0);
 	}
 } 
