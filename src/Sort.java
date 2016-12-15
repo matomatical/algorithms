@@ -6,6 +6,16 @@ import java.util.Comparator;
 public abstract class Sort {
 
 	/**
+	 * Checks whether the elements of A are sorted by their compareTo method
+	 * @param A generic array of objects to check
+	 * @return true iff the objects are in ascending order according to 
+	 * their compareTo() methods
+	 */
+	public static <T extends Comparable<T>> boolean isSorted(T[] A) {
+		return isSorted(A, new ComparableComparator<T>());
+	}
+
+	/**
 	 * Checks whether the elements of A are sorted by a custom comparator
 	 * @param A a generic array of objects to check
 	 * @param comparator a comparator that can compare the objects in the array
@@ -25,16 +35,6 @@ public abstract class Sort {
 		return true;
 	}
 	
-	/**
-	 * Checks whether the elements of A are sorted by their compareTo method
-	 * @param A generic array of objects to check
-	 * @return true iff the objects are in ascending order according to 
-	 * their compareTo() methods
-	 */
-	public static <T extends Comparable<T>> boolean isSorted(T[] A) {
-		return isSorted(A, new ComparableComparator<T>());
-	}
-
 
 	private static Random rng = new Random();
 
@@ -53,7 +53,6 @@ public abstract class Sort {
 	}
 
 
-
 	/** Exchanges the elements at position i and j of array A
 	 * @param A a generic array of objects
 	 * @param i the object at this position will end up in position j
@@ -65,6 +64,10 @@ public abstract class Sort {
 		A[j] = temp;
 	}
 
+	/** true iff a is less than b according to comparator's compare() method */
+	protected static <T> boolean less(T a, T b, Comparator<T> comparator) {
+		return (comparator.compare(a, b) < 0);
+	}
 
 	/**
 	 * Nested class that wraps a Comparable Type T's compareTo() method in a
@@ -79,10 +82,5 @@ public abstract class Sort {
 		public int compare(T a, T b){
 			return a.compareTo(b);
 		}
-	}
-
-	/** true iff a is less than b according to comparator's compare() method */
-	protected static <T> boolean less(T a, T b, Comparator<T> comparator) {
-		return (comparator.compare(a, b) < 0);
 	}
 }

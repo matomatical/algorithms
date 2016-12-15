@@ -11,8 +11,8 @@ public class SelectionSort extends Sort {
 	 * Sorts the elements of A by their compareTo method, using selection sort
 	 * @param A generic array of objects to sort
 	 */
-	public static <T extends Comparable<T>> void selectionSort(T[] A) {
-		selectionSort(A, new ComparableComparator<T>());
+	public static <T extends Comparable<T>> void sort(T[] A) {
+		sort(A, new ComparableComparator<T>());
 	}
 
 	/**
@@ -20,7 +20,7 @@ public class SelectionSort extends Sort {
 	 * @param A generic array of objects to sort
 	 * @param comparator a comparator that can compare the objects in the array
 	 */
-	public static <T> void selectionSort(T[] A, Comparator<T> comparator) {
+	public static <T> void sort(T[] A, Comparator<T> comparator) {
 		// for every slot in the array
 		for(int i = 0; i < A.length; i++){
 			// find the smallest item remaining ...

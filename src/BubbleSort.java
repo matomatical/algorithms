@@ -23,8 +23,8 @@ public class BubbleSort extends Sort {
 	 * Sorts the elements of A by their compareTo method, using bubble sort
 	 * @param A generic array of objects to sort
 	 */
-	public static <T extends Comparable<T>> void bubbleSort(T[] A) {
-		bubbleSort(A, new ComparableComparator<T>());
+	public static <T extends Comparable<T>> void sort(T[] A) {
+		sort(A, new ComparableComparator<T>());
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class BubbleSort extends Sort {
 	 * @param A generic array of objects to sort
 	 * @param comparator a comparator that can compare the objects in the array
 	 */
-	public static <T> void bubbleSort(T[] A, Comparator<T> comparator) {
+	public static <T> void sort(T[] A, Comparator<T> comparator) {
 		// `i` will be the length of the section at the beginning of the array
 		// which may contain out-of-order pairs
 		int i = A.length;

@@ -6,13 +6,21 @@ public class InsertionSort extends Sort {
 
 	// this class should not be instantiated
 	private InsertionSort() {}
+	
+	/**
+	 * Sorts the elements of A by their compareTo method, using insertion sort
+	 * @param A generic array of objects to sort
+	 */
+	public static <T extends Comparable<T>> void sort(T[] A) {
+		sort(A, new ComparableComparator<T>());
+	}
 
 	/**
 	 * Sorts the elements of A by a custom comparator using insertion sort
 	 * @param A generic array of objects to sort
 	 * @param comparator a comparator that can compare the objects in the array
 	 */
-	public static <T> void insertionSort(T[] A, Comparator<T> comparator) {
+	public static <T> void sort(T[] A, Comparator<T> comparator) {
 		// for every item in the array
 		for(int i = 1; i < A.length; i++){
 			
@@ -30,13 +38,5 @@ public class InsertionSort extends Sort {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Sorts the elements of A by their compareTo method, using insertion sort
-	 * @param A generic array of objects to sort
-	 */
-	public static <T extends Comparable<T>> void insertionSort(T[] A) {
-		insertionSort(A, new ComparableComparator<T>());
 	}
 }
