@@ -12,7 +12,7 @@ public class MergeSort {
 	 * @param A generic array of objects to sort
 	 */
 	public static <T extends Comparable<T>> void sort(T[] A) {
-		sort(A, new SimpleSorts.ComparableComparator<T>());
+		sort(A, new Sort.ComparableComparator<T>());
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class MergeSort {
 		while(i < mid && j < hi){
 			// break ties with lo side for stability:
 			// only take hi side if strictly less
-			if(less(A[j], A[i], comparator)) {
+			if(Sort.less(A[j], A[i], comparator)) {
 				B[k++] = A[j++];
 			} else {
 				B[k++] = A[i++];
@@ -98,10 +98,5 @@ public class MergeSort {
 		for(int l = lo; l < k; l++){
 			A[l] = B[l];
 		}
-	}
-
-	/** true iff a is less than b according to comparator's compare() method */
-	private static <T> boolean less(T a, T b, Comparator<T> comparator) {
-		return (comparator.compare(a, b) < 0);
 	}
 }

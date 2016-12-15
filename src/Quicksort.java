@@ -13,7 +13,7 @@ public class Quicksort {
 	 * @param A generic array of objects to sort
 	 */
 	public static <T extends Comparable<T>> void sort(T[] A) {
-		sort(A, new SimpleSorts.ComparableComparator<T>());
+		sort(A, new Sort.ComparableComparator<T>());
 	}
 
 	/**
@@ -70,14 +70,14 @@ public class Quicksort {
 		int i = lo, j = lo, k = hi - 1;
 
 		while (j <= k) {
-			if(less(A[j], pivot, comparator)) { // A[j] < pivot
-				swap(A, i++, j++);
+			if(Sort.less(A[j], pivot, comparator)) { // A[j] < pivot
+				Sort.swap(A, i++, j++);
 
-			} else if (less(pivot, A[j], comparator)) { // A[j] > pivot
+			} else if (Sort.less(pivot, A[j], comparator)) { // A[j] > pivot
 				// find an item that is not larger and swap it into next 
 				// position (growing k's group of larger elements by one)
 
-				while (less(pivot, A[k], comparator)) {
+				while (Sort.less(pivot, A[k], comparator)) {
 				// no need to check for j > k because at least one occurence of
 				// the pivot itself is an element of the array and is either in 
 				// j-1 or somewhere ahead of j. in either case, loop will stop
@@ -86,7 +86,7 @@ public class Quicksort {
 				}
 				
 				if (j <= k) {
-					swap(A, j, k--);
+					Sort.swap(A, j, k--);
 				}
 
 			} else { // A[j] == pivot				
@@ -101,22 +101,5 @@ public class Quicksort {
 	private static class Partition {
 		public int i, j;
 		public Partition(int i, int j) { this.i = i; this.j = j; }
-	}
-
-	/** Exchanges the elements at position i and j of array A
-	 * @param A a generic array of objects
-	 * @param i the object at this position will end up in position j
-	 * @param j the object at this position will end up in position i
-	 */
-	private static <T> void swap(T[] A, int i, int j) {
-		T temp = A[i];
-		A[i] = A[j];
-		A[j] = temp;
-	}
-
-
-	/** true iff a is less than b according to comparator's compare() method */
-	private static <T> boolean less(T a, T b, Comparator<T> comparator) {
-		return (comparator.compare(a, b) < 0);
 	}
 } 
