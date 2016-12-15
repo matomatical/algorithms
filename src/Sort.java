@@ -58,27 +58,25 @@ public abstract class Sort {
 	 * @param i the object at this position will end up in position j
 	 * @param j the object at this position will end up in position i
 	 */
-	protected static <T> void swap(T[] A, int i, int j) {
+	public static <T> void swap(T[] A, int i, int j) {
 		T temp = A[i];
 		A[i] = A[j];
 		A[j] = temp;
 	}
 
 	/** true iff a is less than b according to comparator's compare() method */
-	protected static <T> boolean less(T a, T b, Comparator<T> comparator) {
+	public static <T> boolean less(T a, T b, Comparator<T> comparator) {
 		return (comparator.compare(a, b) < 0);
 	}
 
-	/**
-	 * Nested class that wraps a Comparable Type T's compareTo() method in a
-	 * Comparator object.
-	 */
-	protected static class ComparableComparator<T extends Comparable<T>> 
+	/** true iff a is less than b according to comparator's compare() method */
+	public static <T extends Comparable<T>> boolean less(T a, T b) {
+		return (a.compareTo(b) < 0);
+	}
+
+	/* Wrap a Comparable Type T's compareTo() method in a Comparator object. */
+	public static class ComparableComparator<T extends Comparable<T>> 
 	implements Comparator<T> {
-		// Using this class to treat Comparable sorting methods as Comparator 
-		// sorts enables lower duplication of code throughout this class. in
-		// particular, each algorithm is only implemented once, though it is
-		// accessible through more than one method
 		public int compare(T a, T b){
 			return a.compareTo(b);
 		}
