@@ -2,7 +2,7 @@ package com.matomatical.ads;
 
 import java.util.Comparator;
 
-public class InsertionSort extends Sort {
+public class InsertionSort {
 
 	// this class should not be instantiated
 	private InsertionSort() {}
@@ -12,7 +12,7 @@ public class InsertionSort extends Sort {
 	 * @param A generic array of objects to sort
 	 */
 	public static <T extends Comparable<T>> void sort(T[] A) {
-		sort(A, new ComparableComparator<T>());
+		sort(A, new Sort.ComparableComparator<T>());
 	}
 
 	/**
@@ -27,10 +27,10 @@ public class InsertionSort extends Sort {
 			// pass through the first i-1 items looking for the right place
 			for(int j = i - 1; j >= 0; j--){
 				
-				if (less(A[j+1], A[j], comparator)) {
+				if (Sort.less(A[j+1], A[j], comparator)) {
 					// as long as the item is above its correct place,
 					// continue to swap the item along the array
-					swap(A, j, j+1);
+					Sort.swap(A, j, j+1);
 				} else {
 					// when we find something the item isnt smaller than,
 					// we can finish inserting early

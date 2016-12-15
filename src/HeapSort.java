@@ -2,7 +2,7 @@ package com.matomatical.ads;
 
 import java.util.Comparator;
 
-public class HeapSort extends Sort {
+public class HeapSort {
 
 	// this class should not be instantiated
 	private HeapSort() {}
@@ -12,7 +12,7 @@ public class HeapSort extends Sort {
 	 * @param A generic array of objects to sort
 	 */
 	public static <T extends Comparable<T>> void sort(T[] A) {
-		sort(A, new ComparableComparator<T>());
+		sort(A, new Sort.ComparableComparator<T>());
 	}
 
 	/**
@@ -29,7 +29,7 @@ public class HeapSort extends Sort {
 
 		// repeatedly extract max and reduce heap length (n)
 		for (int n = A.length; n > 1; n--) {
-			swap(A, 0, n-1);
+			Sort.swap(A, 0, n-1);
 			siftdown(A, n-1, comparator, 0);
 		}
 	}
@@ -45,8 +45,8 @@ public class HeapSort extends Sort {
 		
 		int me = i, child = maxchild(A, n, c, me);
 
-		while(child > 0 && less(A[me], A[child], c)) {
-			swap(A, me, child);
+		while(child > 0 && Sort.less(A[me], A[child], c)) {
+			Sort.swap(A, me, child);
 			me = child;
 			child = maxchild(A, n, c, me);
 		}
@@ -71,7 +71,7 @@ public class HeapSort extends Sort {
 		if(left < n) {
 			if(right < n) {
 				// both children are valid, we should return the larger one
-				return (less(A[left], A[right], c) ? right : left);
+				return (Sort.less(A[left], A[right], c) ? right : left);
 			} else {
 				return left;
 			}

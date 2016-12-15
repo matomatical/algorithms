@@ -3,7 +3,10 @@ package com.matomatical.ads;
 import java.util.Random;
 import java.util.Comparator;
 
-public abstract class Sort {
+public class Sort {
+
+	// this class should not be instantiated
+	private Sort() {}
 
 	/**
 	 * Checks whether the elements of A are sorted by their compareTo method

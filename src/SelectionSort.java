@@ -2,7 +2,7 @@ package com.matomatical.ads;
 
 import java.util.Comparator;
 
-public class SelectionSort extends Sort {
+public class SelectionSort {
 
 	// this class should not be instantiated
 	private SelectionSort() {}
@@ -12,7 +12,7 @@ public class SelectionSort extends Sort {
 	 * @param A generic array of objects to sort
 	 */
 	public static <T extends Comparable<T>> void sort(T[] A) {
-		sort(A, new ComparableComparator<T>());
+		sort(A, new Sort.ComparableComparator<T>());
 	}
 
 	/**
@@ -26,12 +26,12 @@ public class SelectionSort extends Sort {
 			// find the smallest item remaining ...
 			int min = i;
 			for(int j = i + 1; j < A.length; j++){
-				if (less(A[j], A[min], comparator)) {
+				if (Sort.less(A[j], A[min], comparator)) {
 					min = j;
 				}
 			}
 			// ... its correct position is right here at index i
-			swap(A, i, min);
+			Sort.swap(A, i, min);
 		}
 	}
 }

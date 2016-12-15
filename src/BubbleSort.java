@@ -14,7 +14,7 @@ import java.util.Comparator;
 // has been done before (and of course it has). Wikipedia reports that the 
 // improvement results in "about a worst case 50% improvement in comparison
 // count (though no improvement in swap counts)", which makes sense!
-public class BubbleSort extends Sort {
+public class BubbleSort {
 
 	// this class should not be instantiated
 	private BubbleSort() {}
@@ -24,7 +24,7 @@ public class BubbleSort extends Sort {
 	 * @param A generic array of objects to sort
 	 */
 	public static <T extends Comparable<T>> void sort(T[] A) {
-		sort(A, new ComparableComparator<T>());
+		sort(A, new Sort.ComparableComparator<T>());
 	}
 
 	/**
@@ -52,8 +52,8 @@ public class BubbleSort extends Sort {
 			for (int j = 1; j < i; j++) {
 
 				// if we encounter an unordered pair, swap it
-				if (less(A[j], A[j-1], comparator)) {
-					swap(A, j, j-1);
+				if (Sort.less(A[j], A[j-1], comparator)) {
+					Sort.swap(A, j, j-1);
 
 					// but also record the value of `j` in `k`, because if no 
 					// more swaps are made during this pass, we can be certain

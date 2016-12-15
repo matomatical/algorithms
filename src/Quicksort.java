@@ -3,7 +3,7 @@ package com.matomatical.ads;
 import java.util.Random;
 import java.util.Comparator;
 
-public class Quicksort extends Sort {
+public class Quicksort {
 
 	// this class should not be instantiated
 	private Quicksort() {}
@@ -13,7 +13,7 @@ public class Quicksort extends Sort {
 	 * @param A generic array of objects to sort
 	 */
 	public static <T extends Comparable<T>> void sort(T[] A) {
-		sort(A, new ComparableComparator<T>());
+		sort(A, new Sort.ComparableComparator<T>());
 	}
 
 	/**
@@ -70,14 +70,14 @@ public class Quicksort extends Sort {
 		int i = lo, j = lo, k = hi - 1;
 
 		while (j <= k) {
-			if(less(A[j], pivot, comparator)) { // A[j] < pivot
-				swap(A, i++, j++);
+			if(Sort.less(A[j], pivot, comparator)) { // A[j] < pivot
+				Sort.swap(A, i++, j++);
 
-			} else if (less(pivot, A[j], comparator)) { // A[j] > pivot
+			} else if (Sort.less(pivot, A[j], comparator)) { // A[j] > pivot
 				// find an item that is not larger and swap it into next 
 				// position (growing k's group of larger elements by one)
 
-				while (less(pivot, A[k], comparator)) {
+				while (Sort.less(pivot, A[k], comparator)) {
 				// no need to check for j > k because at least one occurence of
 				// the pivot itself is an element of the array and is either in 
 				// j-1 or somewhere ahead of j. in either case, loop will stop
@@ -86,7 +86,7 @@ public class Quicksort extends Sort {
 				}
 				
 				if (j <= k) {
-					swap(A, j, k--);
+					Sort.swap(A, j, k--);
 				}
 
 			} else { // A[j] == pivot				
