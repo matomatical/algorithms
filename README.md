@@ -9,7 +9,7 @@ A collection of algorithms and data structure utility classes, created as self-a
 * **LinkedList** and **DoublyLinkedList** classes providing low-level dynamic collections with methods to add/remove from the start/end of the list, and iterators.
 * **Queue** and **Stack** classes, built on top of **LinkedList** with the usual FIFO and LIFO semantics (respectively).
 * **Sort**, a collection of static helper methods for sorting algorithms and applications, such as swapping, comparing and checking if an array is sorted.
-* A collection of classes with static `sort` methods that operate on a generic arrays of Comparable objects, or with Comparators. Also:
+* A collection of classes with static `sort` methods that operate on a generic arrays of Comparable objects, or with Comparators. Including:
     - **BubbleSort**, using a strategy with a slight improvement that performs a smaller number of comparisons compared to the usual strategy for some inputs.
     - **InsertionSort**, using the usual strategy.
     - **SelectionSort**, using the usual strategy.
