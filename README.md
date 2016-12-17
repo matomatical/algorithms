@@ -18,6 +18,7 @@ A collection of algorithms and data structure utility classes, created as self-a
     - **HeapSort**, using an in-place max heap temporarily built on top of the array.
 * **DynamicArray**, allowing regular array access and dynamically growing and shrinking as you add items at the end. Grows when full and shrinks when 1/4 full (to half size, to avoid thrashing).
 * **PriorityQueue** class, offering a value-based ordered collection of comparable items, using a max heap built on top of a **DynamicArray**.
+* **BinarySearchTree** class, offering simple key-value association storate with `insert`, `search`, `contains`, and `nullsearch*` methods (* `nullsearch` returns null if a key is not found, rather than throwing an exception).
 
 ## Testing
 
