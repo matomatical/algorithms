@@ -1,7 +1,7 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.matomatical.ads.SimpleSorts;
+import com.matomatical.ads.Sort;
 import com.matomatical.ads.HeapSort;
 
 public class HeapSortTest {
@@ -11,7 +11,7 @@ public class HeapSortTest {
 		Integer[] array = {1, 2, 3, 4, 5};
 
 		HeapSort.sort(array);
-		boolean sorted = SimpleSorts.isSorted(array);
+		boolean sorted = Sort.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -21,7 +21,7 @@ public class HeapSortTest {
 		Integer[] array = {5, 4, 3, 2, 1};
 
 		HeapSort.sort(array);
-		boolean sorted = SimpleSorts.isSorted(array);
+		boolean sorted = Sort.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -31,7 +31,7 @@ public class HeapSortTest {
 		Integer[] array = {3, 2, 5, 4, 1};
 
 		HeapSort.sort(array);
-		boolean sorted = SimpleSorts.isSorted(array);
+		boolean sorted = Sort.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -41,7 +41,7 @@ public class HeapSortTest {
 		Integer[] array = {3, 2, 4, 3, 5};
 
 		HeapSort.sort(array);
-		boolean sorted = SimpleSorts.isSorted(array);
+		boolean sorted = Sort.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
@@ -52,7 +52,7 @@ public class HeapSortTest {
 
 		HeapSort.sort(array);
 
-		boolean sorted = SimpleSorts.isSorted(array);
+		boolean sorted = Sort.isSorted(array);
 
 		Assert.assertTrue(sorted);
 	}
