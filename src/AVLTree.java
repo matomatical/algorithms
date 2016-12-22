@@ -126,8 +126,8 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
 
 		Node<Key, Value> child = node.right;
 
-		node.left = child.right;
-		child.right = node;
+		node.right = child.left;
+		child.left = node;
 
 		node.updateHeight();
 		child.updateHeight();
@@ -143,8 +143,8 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
 
 		Node<Key, Value> child = node.left;
 
-		node.right = child.left;
-		child.left = node;
+		node.left = child.right;
+		child.right = node;
 
 		node.updateHeight();
 		child.updateHeight();
