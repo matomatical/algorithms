@@ -239,8 +239,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void containsShouldReturnFalseOnMissingKeyInLargerTree() {
-		BinarySearchTree<String, String> bst =
-			new BinarySearchTree<String, String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		bst.insert("abc", "def"); bst.insert("1", "2"); bst.insert("2", "3"); 
 		bst.insert("more", "nodes"); bst.insert("hi", "there");
 
@@ -251,8 +250,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteNodeNotInTreeShouldNotComplain() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 						bst.insert("H", "");
 		bst.insert("D","");				bst.insert("L","");
@@ -270,8 +268,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteRootTest1() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 		bst.insert("H", ""); // just a root
 
@@ -284,8 +281,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteRootTest2() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 				bst.insert("H", ""); // root
 		bst.insert("D",""); // and a left child
@@ -302,8 +298,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteRootTest3() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 		bst.insert("H", ""); // root and a right child
 				bst.insert("L","");
@@ -320,8 +315,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteRootTest4() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 					bst.insert("H", ""); // root and both children
 		bst.insert("D","");		bst.insert("L","");
@@ -341,8 +335,7 @@ public class BinarySearchTreeTest {
 	
 	@Test
 	public void deleteRootTest5() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 						bst.insert("H", "");
 		bst.insert("D","");				bst.insert("L","");
@@ -363,8 +356,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteRightNodeTest1() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 						bst.insert("H", "");
 		bst.insert("D","");				bst.insert("L","");
@@ -383,8 +375,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteRightNodeTest2() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 						bst.insert("H", "");
 		bst.insert("D","");				bst.insert("L","");
@@ -404,8 +395,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteRightNodeTest3() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 						bst.insert("H", "");
 		bst.insert("D","");				bst.insert("L","");
@@ -425,8 +415,7 @@ public class BinarySearchTreeTest {
 	
 	@Test
 	public void deleteRightNodeTest4() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 						bst.insert("H", "");
 		bst.insert("D","");				bst.insert("L","");
@@ -446,8 +435,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteRightNodeTest5() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 					bst.insert("H", "");
 		bst.insert("D","");			bst.insert("L","");
@@ -468,8 +456,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteRightNodeTest6() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 					bst.insert("H", "");
 		bst.insert("D","");			bst.insert("L","");
@@ -490,8 +477,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteLeftNodeTest1() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 					bst.insert("H", "");
 		bst.insert("D","");		bst.insert("L","");
@@ -510,8 +496,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteLeftNodeTest2() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 								bst.insert("H", "");
 				bst.insert("D","");				bst.insert("L","");
@@ -531,8 +516,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteLeftNodeTest3() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 						bst.insert("H", "");
 		bst.insert("D","");				bst.insert("L","");
@@ -552,8 +536,7 @@ public class BinarySearchTreeTest {
 	
 	@Test
 	public void deleteLeftNodeTest4() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 									bst.insert("H", "");
 					bst.insert("D","");				bst.insert("L","");
@@ -573,8 +556,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteLeftNodeTest5() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 									bst.insert("H", "");
 					bst.insert("D","");				bst.insert("L","");
@@ -596,8 +578,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void deleteLeftNodeTest6() {
-		BinarySearchTree<String,String> bst =
-			new BinarySearchTree<String,String>();
+		BinarySearchTree<String, String> bst = new BinarySearchTree<>();
 		// create the tree
 									bst.insert("H", "");
 					bst.insert("D","");				bst.insert("L","");

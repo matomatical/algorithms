@@ -15,18 +15,26 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
 			this.value = value;
 		}
 
-		// NOTE: requires that subtree heights are correct, if they exist
+		/**
+		 * Updates the height of this node based on the most up-to-date
+		 * heights of its substrees
+		 */
 		public void updateHeight() {
 			
 			// height is height of the taller subtree (starting at zero for an 
-			// empty subtree)...
+			// empty subtree), plus one (counting this node)
+
 			int l = (left == null  ? 0 : left.height);
 			int r = (right == null ? 0 : right.height);
-
-			// plus one counting this node
 			this.height = 1 + (l > r ? l : r);
 		}
 
+		/**
+		 * returns the balance factor for this node according to the calculation
+		 * (right height - left height). That means a positive number indicates
+		 * an imbalance to the right, and a negative means an imbalance to the
+		 * left.
+		 */
 		public int getBalanceFactor() {
 			int l = (left == null  ? 0 : left.height);
 			int r = (right == null ? 0 : right.height);
@@ -38,7 +46,6 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
 	// the node at the root of the tree
 	Node<Key, Value> root = null;
 
-
 	/**
 	 * Insert a new item into the tree with a given key and value. if there is
 	 * already an item with this key, update its value.
@@ -49,6 +56,16 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
 		root = insert(root, key, value);
 	}
 
+	/**
+	 * Helper method to recursively insert in the tree, returning the 
+	 * appropriate child pointer (after insertion and possible load balancing)
+	 * on the way back up. Also keeps heights up to date.
+	 * @param node the node on our way through the tree
+	 * @param key the search key for retreiving this value later
+	 * @param value the value to store under this key
+	 * @return the correct node that the above node should point to after
+	 * insertion (a new node, or the result of a rotation)
+	 */
 	private Node<Key,Value> insert(Node<Key,Value> node, Key key, Value value) {
 
 		if (node == null) {
@@ -76,6 +93,13 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
 		return balance(node);
 	}
 
+	/** 
+	 * Check the balance factor of a node and preform rotations if things get 
+	 * out of balance. Also keeps the heights up to date through any transfor-
+	 * mations
+	 * @param node the node to check
+	 * @return the correct replacement node after any necessary rotations
+	 */
 	private Node<Key,Value> balance(Node<Key, Value> node) {
 
 		// okay let's check this node's balance factor
@@ -118,6 +142,14 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
 		}
 	}
 
+	/**
+	 * rotate the node to become the left child of its right child. Also keeps
+	 * the height of all nodes involved up to date.
+	 * @param node the node to rotate left
+	 * @return the replacement node
+	 * @throws TreeException if a rotation is not possible because the node or
+	 * its right child are null
+	 */
 	private Node<Key, Value> rotateLeft(Node<Key, Value> node) {
 		if (node == null || node.right == null) {
 			// we can't rotate nodes that dont exist
@@ -135,6 +167,14 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
 		return child;
 	}
 
+	/**
+	 * rotate the node to become the right child of its left child. Also keeps
+	 * the height of all nodes involved up to date.
+	 * @param node the node to rotate right
+	 * @return the replacement node
+	 * @throws TreeException if a rotation is not possible because the node or
+	 * its left child are null
+	 */
 	private Node<Key, Value> rotateRight(Node<Key, Value> node) {
 		if (node == null || node.left == null) {
 			// we can't rotate nodes that dont exist
@@ -185,7 +225,6 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
 		throw new NotFoundException("could not find item with key " + key);
 	}
 
-
 	/**
 	 * Search a tree for the value associated with a key, but silently return
 	 * null if the key is not found.
@@ -232,5 +271,138 @@ public class AVLTree<Key extends Comparable<Key>, Value> {
 		return false;
 	}
 
+
+	/**
+	 * Delete the entry associated with a given key from the tree.
+	 * @param key the key whose entry is to be removed from the tree
+	 */
+	public void delete(Key key){
+		root = delete(root, key);
+	}
+
+	/**
+	 * Helper method to recursively find the node to be deleted (based on key)
+	 * and update the tree on the way back (to make sure it remains balanced)
+	 * @param key the key whose entry is to be removed from the tree
+	 * @return the node provided, or its replacement if the tree was modified
+	 * during deletion
+	 */
+	private Node<Key, Value> delete(Node<Key, Value> node, Key key) {
+
+		// base case
+		if (node == null) {
+			// if we run into a null node, then we can conclude that the 
+			// node to be deleted is already not in the tree.
+			return null;
+		}
+
+		// recursive case
+		int comparison = node.key.compareTo(key);
+		if(comparison < 0) {
+			// node < key, key might be on the right side:
+			node.right = delete(node.right, key);
+
+		} else if (comparison > 0) {
+			// node > key, key might be on the left side:
+			node.left = delete(node.left, key);
+
+		} else {
+			// node == key, this is the key! we found it!
+			// time to actually delete it...
+			return delete(node);
+		}
+
+		// make sure this node's height is up to date before we head back up
+		// then sort out any resulting imbalances, and return the appropriate 
+		// node
+		node.updateHeight();
+		return balance(node);
+	}
+
+	/**
+	 * carry out the actual delete operation on a node in the tree, and return
+	 * the correct replacement node (successor, or null) resulting from removing
+	 * the node from the tree and substituting its successor in its place
+	 * (AND balancing the resulting tree from the successor down)
+	 * @param node the node to replace
+	 * @return the value that it should be replaced with on the parent
+	 */
+	private Node<Key, Value> delete(Node<Key, Value> node) {
+		if(node.left == null && node.right == null) {
+			// we can just remove this node from the tree, make the parent link
+			// null. there won't be any rebalancing to do
+			return null;
+
+		} else if (node.left == null){
+			// left child is null, but right is not. we can just promote the
+			// right child to become the parents new child
+			return node.right;
+
+		} else if (node.right == null) {
+			// right child is null, but left is not. we can just promote the 
+			// left child to become the parents new child
+			return node.left;
+
+		} else {
+			// we have two children, great! lets find and promote our successor
+
+			if(node.right.left == null) {
+				node.right.left = node.left;
+				node.right.updateHeight();
+				return balance(node.right);
+			} else {
+				
+				Node<Key, Value> presuccessor = node.right;
+				while (presuccessor.left.left != null) {
+					presuccessor = presuccessor.left;
+				}
+				Node<Key, Value> successor = presuccessor.left;
+
+				successor.left = node.left;
+				presuccessor.left = successor.right;
+				successor.right = balanceLeft(node.right);
+				
+				successor.updateHeight();
+				return balance(successor);
+			}
+		}
+	}
+
+	/** balance all left children of this node recursively, return result */
+	private Node<Key, Value> balanceLeft(Node<Key, Value> node) {
+		if(node == null) {
+			return null;
+		} else {
+			node.left = balanceLeft(node.left);
+			node.updateHeight();
+			return balance(node);
+		}
+	}
+
+	/** private helper method for debugging: print the path to a node */
+	private String path(Key key) {
+		
+		Node<Key, Value> node = root;
+		String path = "";
+		while(node != null) {
+			path += node.value;
+			int comparison = node.key.compareTo(key);
+			if(comparison < 0) {
+				// node < key, key might be on the right side:
+				path += "/";
+				node = node.right;
+			} else if (comparison > 0) {
+				// node > key, key might be on the left side:
+				path += "\\";
+				node = node.left;
+			} else {
+				// node == key, this is the key! we found it!
+				return path;
+			}
+		}
+
+		// this key is nowhere to be found in the tree
+		return path + "!?";
+	}
 
 }
