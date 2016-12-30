@@ -93,7 +93,12 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 	}
 
 	public String toString() {
-		return root.toString();
+		if(root != null) {
+			return root.toString();	
+		} else {
+			return "null";
+		}
+		
 	}
 
 	private class Pair implements Comparable<Pair>{
@@ -115,12 +120,12 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 		private static final int MAXPAIRS = 2;
 		private int n; // actual number of pairs (always 0 <= n <= MAXPAIRS)
 
-		// supressions silence warnings about generic array creation using casts
-		// as per lectures and http://stackoverflow.com/a/2924453/5395650
+		// overcoming generic array creation errors
+		// see stackoverflow.com/a/10690245/5395650
 		@SuppressWarnings("unchecked")
-		private Pair[] pairs = (Pair[]) new Object[MAXPAIRS];
+		private Pair[] pairs = new TwoThreeTree.Pair[MAXPAIRS];
 		@SuppressWarnings("unchecked")
-		private Node[] links = (Node[]) new Object[MAXPAIRS+1];
+		private Node[] links = new TwoThreeTree.Node[MAXPAIRS+1];
 		
 		public Node(Key key, Value value) {
 			pairs[0] = new Pair(key, value);
@@ -168,8 +173,7 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 		 */
 		public Node insert(Node that) {
 			if(that.n != 1) {
-				throw new RuntimeException(
-					"can't insert a " + (that.n+1) + " node");
+				throw new TreeException("can't insert a "+(that.n+1)+" node");
 			}
 
 			if(this.n == 1) {
@@ -190,7 +194,7 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 					// stuff on the left
 
 					// move existing info to left
-					this.pairs[1] = this.pairs[1];
+					this.pairs[1] = this.pairs[0];
 					this.links[2] = this.links[1];
 
 					// copy in new info
@@ -212,7 +216,7 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 				// harder case: insertion is going to cause this node to break
 				// apart!
 				
-				if (this.pairs[0].compareTo(that.pairs[0]) < 0) {
+				if (this.pairs[0].compareTo(that.pairs[0]) > 0) {
 					// we're inserting on the left side of both pairs
 
 					// keep the right pair as a new node
@@ -232,7 +236,7 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 					
 					// note that we lose the previous value of this.links[0]
 
-				} else if (this.pairs[1].compareTo(that.pairs[0]) > 0) {
+				} else if (this.pairs[1].compareTo(that.pairs[0]) < 0) {
 					// we're inserting on the left side of both pairs, second
 					// pair will be promoted
 
@@ -284,12 +288,12 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 		}
 
 		public String toString() {
-			String string = links[0].toString() + "/[" + pairs[0].toString();
-			for(int i = 1; i < n+1; i++) {
-				string +=  "]" + links[i].toString()
-						 + "[" + pairs[i].toString();
+
+			String string = "[" + links[0] + pairs[0];
+			for(int i = 1; i < n; i++) {
+				string += "" + links[i] + pairs[i];
 			}
-			string += "]\\" + links[n].toString();
+			string += links[n] + "]";
 			return string;
 		}
 	}
@@ -298,10 +302,18 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 		TwoThreeTree<String, Integer> t = new TwoThreeTree<>();
 
 		t.insert("A", 1);
-		t.insert("B", 1);
-		t.insert("C", 1);
-		t.insert("D", 1);
-		t.insert("D", 3);
+		t.insert("L", 1);
+		t.insert("G", 1);
+		t.insert("O", 1);
+		t.insert("R", 1);
+		t.insert("I", 1);
+		t.insert("T", 1);
+		t.insert("H", 1);
+		t.insert("M", 1);
+		t.insert("S", 1);
+		t.insert("F", 1);
+		t.insert("U", 1);
+		t.insert("N", 1);
 
 		System.out.println(t);
 	}
