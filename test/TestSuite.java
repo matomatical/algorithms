@@ -24,6 +24,7 @@ import org.junit.BeforeClass;
 	PriorityQueueTest.class,
 	BinarySearchTreeTest.class,
 	AVLTreeTest.class,
+	TwoThreeTreeTest.class,
 })
 
 /** TestSuite; junit test class to run all unit tests

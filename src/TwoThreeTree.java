@@ -2,8 +2,16 @@ package com.matomatical.ads;
 
 public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 
+	// the node at the root of the tree
 	private Node root = null;
 
+	/**
+	 * Search for the value associated with a given key, throwing an exception 
+	 * if the key is not found in this tree
+	 * @param key look for the value associated with this key
+	 * @return Value associated with key, if it exists
+	 * @throws NotFoundException if the key is not contained in the tree
+	 */
 	public Value search(Key key) {
 		Node node = root;
 
@@ -23,6 +31,11 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 		throw new NotFoundException("could not find item with key " + key);
 	}
 
+	/**
+	 * Is there an instance of some key inside this tree?
+	 * @param key the search key to look for
+	 * @return true iff the search tree contains key
+	 */
 	public boolean contains(Key key) {
 		Node node = root;
 
@@ -42,6 +55,16 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 		return false;
 	}
 
+	/**
+	 * Search a tree for the value associated with a key, but silently return
+	 * null if the key is not found.
+	 * <br>
+	 * NOTE: a return value of null may indicate that a key has not been found,
+	 * but it may just indicate a key whose associated value is null
+	 * @param key the key to search for
+	 * @return the value associated with key in the tree, or null if the key is
+	 * not contained in the tree
+	 */
 	public Value nullsearch(Key key) {
 		try {
 			return search(key);
@@ -50,6 +73,12 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 		}
 	}
 
+	/**
+	 * Insert a new item into the tree with a given key and value. if there is
+	 * already an item with this key, update its value.
+	 * @param key the search key for retreiving this value later
+	 * @param value the value to store under this key
+	 */
 	public void insert(Key key, Value value) {
 		
 		// base base case: root is null
@@ -67,6 +96,16 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 		}
 	}
 
+	/**
+	 * Helper method to recursively insert in the tree, returning any promoted
+	 * nodes from transformations that occured in the subtree on the way back up
+	 * if no node was promoted, the return value will be null
+	 * @param node the node on our way through the tree
+	 * @param key the search key for retreiving this value later
+	 * @param value the value to store under this key
+	 * @return a promoted node from the subtree inserted-into, or null if no
+	 * change has to occur above the insertion
+	 */
 	private Node insert(Node node, Key key, Value value) {
 		
 		// equals case: key already exists in this node
@@ -101,6 +140,7 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 		
 	}
 
+	// internal pair class, holds a key-value pair
 	private class Pair implements Comparable<Pair>{
 		public final Key key;
 		public Value value;
@@ -116,6 +156,7 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 		}
 	}
 
+	// internal node class, forms the tree
 	private class Node {
 		private static final int MAXPAIRS = 2;
 		private int n; // actual number of pairs (always 0 <= n <= MAXPAIRS)
@@ -137,6 +178,7 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 			n = 1;
 		}
 
+		/** Get the pair whose key matches this key (or null if none) */
 		public Pair match(Key key) {
 			for(int i = 0; i < n; i++) {
 				if(key.compareTo(pairs[i].key) == 0) {
@@ -147,6 +189,7 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 			return null;
 		}
 
+		/** Is this node a leaf node? (node with no children) */
 		public boolean leaf() {
 			for(int i = 0; i < n+1; i++) {
 				if(links[i] != null) {
@@ -158,6 +201,7 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 			return true;
 		}
 
+		/** Get the child node that this key belongs in */
 		public Node next(Key key) {
 			for(int i = 0; i < n; i++) {
 				if(key.compareTo(pairs[i].key) < 0) {
@@ -168,8 +212,18 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 		}
 
 		/**
-		 * this method needs to take a two-node and insert it and its links into
-		 * the current node, POSSIBLY OVERFLOWING AND CREATING A SPLIT
+		 * Merge a two-node into this (two- or three-) node. If this is a two-
+		 * node, then the given node will join it to make a three-node, causing
+		 * no overflow and returning null. If this is a three-node, then the
+		 * given node and the two existing pairs will be rearranged so that the
+		 * median-key pair is promoted with the other two pairs as its children.
+		 * the median-key pair will then be returned (to be handled further up
+		 * the tree).
+		 * <br>
+		 * This method loses a reference to a child node, depending on where the
+		 * given node fits. This is fine because those references should be
+		 * carried within the given node, which will have come from the lost
+		 * child node's direction.
 		 */
 		public Node insert(Node that) {
 			if(that.n != 1) {
@@ -296,25 +350,5 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
 			string += links[n] + "]";
 			return string;
 		}
-	}
-
-	public static void main(String[] args) {
-		TwoThreeTree<String, Integer> t = new TwoThreeTree<>();
-
-		t.insert("A", 1);
-		t.insert("L", 1);
-		t.insert("G", 1);
-		t.insert("O", 1);
-		t.insert("R", 1);
-		t.insert("I", 1);
-		t.insert("T", 1);
-		t.insert("H", 1);
-		t.insert("M", 1);
-		t.insert("S", 1);
-		t.insert("F", 1);
-		t.insert("U", 1);
-		t.insert("N", 1);
-
-		System.out.println(t);
 	}
 }
