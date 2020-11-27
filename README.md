@@ -1,6 +1,6 @@
 # Algorithms and Data Structures in Java
 
-A collection of algorithms and data structure utility classes, created as self-assigned projects while studing Princeton's online courses Algorithms I, Algorithms II, and Analysis of Algorithms.
+A collection of algorithms and data structure utility classes, created as self-assigned projects while studing Princeton's online course *Algorithms I*.
 
 ## Contents
 
